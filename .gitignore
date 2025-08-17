@@ -1,0 +1,49 @@
+# Large data files
+BiMMuDa-main/audio_data/
+BiMMuDa-main/backup_data/
+
+# Results and output files
+results/
+*.csv
+*.json
+
+# Keep only sample results
+!results/sample/
+!results/sample/*.csv
+
+# Python cache and environment files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Original analysis scripts (keep clean versions only on GitHub)
+analysis/dfa_batch_amplitude_envelope.py
+analysis/mfdfa_batch_amplitude_envelope.py
