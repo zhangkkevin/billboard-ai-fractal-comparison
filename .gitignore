@@ -7,9 +7,9 @@ results/
 *.csv
 *.json
 
-# Keep only sample results
-!results/sample/
-!results/sample/*.csv
+# Keep reference data for reproducibility
+!reference_data/
+!reference_data/**/*.csv
 
 # Python cache and environment files
 __pycache__/
