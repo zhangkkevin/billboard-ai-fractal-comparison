@@ -47,3 +47,4 @@ logs/
 # Original analysis scripts (keep clean versions only on GitHub)
 analysis/dfa_batch_amplitude_envelope.py
 analysis/mfdfa_batch_amplitude_envelope.py
+analysis/midi_fractal_batch_analysis.py
