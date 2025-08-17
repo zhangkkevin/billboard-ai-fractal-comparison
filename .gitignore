@@ -48,3 +48,7 @@ logs/
 analysis/dfa_batch_amplitude_envelope.py
 analysis/mfdfa_batch_amplitude_envelope.py
 analysis/midi_fractal_batch_analysis.py
+
+# Keep notebooks for analysis and visualization
+!notebooks/
+!notebooks/*.ipynb
