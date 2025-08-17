@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billboard AI Fractal Comparison - Audio Samples</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Billboard AI Fractal Comparison</h1>
+            <p class="subtitle">Audio Samples from Multifractal Analysis</p>
+            <p class="description">
+                This website showcases audio samples from our fractal analysis of Billboard music and AI-generated music. 
+                Each song represents extreme cases in our DFA and MFDFA analysis.
+            </p>
+        </header>
+
+        <main>
+            <!-- DFA Analysis Section -->
+            <section class="analysis-section">
+                <h2>DFA Analysis Results</h2>
+                <p>Detrended Fluctuation Analysis (DFA) measures long-range correlations in music amplitude envelopes.</p>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Closest to α = 1 (Random Walk)</h3>
+                        <div class="song-list" id="dfa-closest"></div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Minimum α (Anti-persistent)</h3>
+                        <div class="song-list" id="dfa-min"></div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Maximum α (Persistent)</h3>
+                        <div class="song-list" id="dfa-max"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MFDFA Analysis Section -->
+            <section class="analysis-section">
+                <h2>MFDFA Analysis Results</h2>
+                <p>Multifractal Detrended Fluctuation Analysis (MFDFA) reveals complex scaling behavior across different fluctuation magnitudes.</p>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Maximum α Width (Complex Structure)</h3>
+                        <div class="song-list" id="mfdfa-max-width"></div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Minimum α Width (Simple Structure)</h3>
+                        <div class="song-list" id="mfdfa-min-width"></div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Maximum Skew (Left-skewed)</h3>
+                        <div class="song-list" id="mfdfa-max-skew"></div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Minimum Skew (Right-skewed)</h3>
+                        <div class="song-list" id="mfdfa-min-skew"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- JSD Comparison Section -->
+            <section class="analysis-section">
+                <h2>AI vs Billboard Comparison</h2>
+                <p>Jensen-Shannon Divergence (JSD) measures how similar AI-generated music is to Billboard patterns.</p>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Best Match to Billboard</h3>
+                        <div class="song-list" id="jsd-best"></div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Worst Match to Billboard</h3>
+                        <div class="song-list" id="jsd-worst"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>
+                <strong>Research Paper:</strong> "Multifractal Comparison of Billboard and AI-Generated Music" 
+                (Submitted to ACM Multimedia Brave New Ideas 2025)
+            </p>
+            <p>
+                <strong>GitHub Repository:</strong> 
+                <a href="https://github.com/zhangkkevin/billboard-ai-fractal-comparison" target="_blank">
+                    billboard-ai-fractal-comparison
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
