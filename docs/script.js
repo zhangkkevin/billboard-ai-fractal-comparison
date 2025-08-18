@@ -246,7 +246,7 @@ function populateSection(sectionId, songs) {
 // Function to load audio metadata
 async function loadAudioMetadata() {
     try {
-        const response = await fetch('audio_metadata.json?v=3');
+        const response = await fetch('audio_metadata.json?v=4');
         if (response.ok) {
             const metadata = await response.json();
             window.audioMetadata = metadata;

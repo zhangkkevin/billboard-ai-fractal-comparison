@@ -3,22 +3,7 @@
 This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music, as described in the paper:
 
 **"Multifractal Comparison of Billboard and AI-Generated Music"**  
-*(submitted to ACM Multimedia Brave New Ideas 2025)*
-
-## 🌐 Interactive Website
-
-**🎵 [Explore the Analysis Results Online](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)**
-
-Our interactive website showcases the fractal analysis results with:
-- **Audio samples** from the analysis (YouTube embeds for Billboard, local files for AI-generated)
-- **Interactive audio players** for all 34 songs from the study
-- **Real-time audio playback** to hear the fractal differences
-
-### Website Features
-- **DFA Analysis**: Songs closest to α=1.0, minimum α, and maximum α values
-- **MFDFA Analysis**: Maximum/minimum width and skew spectrum examples
-- **JSD Comparison**: Best and worst Jensen-Shannon divergence scores
-- **Copyright-compliant**: YouTube embeds for original music, local files for AI-generated
+*(accepted to ACM Multimedia Brave New Ideas 2025)*
 
 ## Overview
 
@@ -29,6 +14,17 @@ This project analyzes the fractal properties of music amplitude envelopes using:
 The analysis compares:
 - **Billboard Top 5 songs** (1950-2024) - Human-created music
 - **AI-generated music** from Suno, DiffRhythm, and YuE models
+
+## 🌐 Interactive Website
+
+**🎵 [Listen to the Audio Samples from Analysis Results Online](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)**
+
+Our interactive website showcases 34 carefully selected songs representing extreme cases from the fractal analysis:
+
+- **DFA Analysis**: Songs closest to α=1.0, minimum α, and maximum α values
+- **MFDFA Analysis**: Maximum/minimum width and skew spectrum examples  
+- **JSD Comparison**: Best and worst Jensen-Shannon divergence scores
+- **Copyright-compliant**: YouTube embeds for original Billboard music, local audio files for AI-generated music
 
 ## Repository Structure
 
@@ -75,7 +71,7 @@ pip install numpy pandas scipy matplotlib seaborn nolds MFDFA tqdm pydub
 
 **🌐 Public Website**: [https://zhangkkevin.github.io/billboard-ai-fractal-comparison/](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)
 
-**Local Development**:
+**Local Development** (for testing):
 ```bash
 # Navigate to the docs directory
 cd docs
@@ -236,7 +232,7 @@ The interactive website displays 34 carefully selected songs representing extrem
   author={Zhang, Kevin},
   journal={ACM Multimedia Brave New Ideas},
   year={2025},
-  note={Submitted}
+  note={Accepted}
 }
 ```
 
@@ -289,4 +285,4 @@ For questions about this research, please refer to the author contact listed in 
 
 ---
 
-**Note**: This repository is currently under anonymous review. All content will be made publicly available upon acceptance and publication of the paper.
+**Note**: This repository accompanies the accepted paper at ACM Multimedia Brave New Ideas 2025. The interactive website and all analysis code are publicly available.
