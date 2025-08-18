@@ -219,6 +219,17 @@ function findAudioFile(song) {
             metadata.year === song.year) {
             return metadata.file;
         }
+        
+        // Try matching with underscores replaced by spaces
+        const metadataTitleNoUnderscore = metadataTitle.replace(/_/g, ' ');
+        const metadataArtistNoUnderscore = metadataArtist.replace(/_/g, ' ');
+        
+        if (metadata.model.toLowerCase() === song.model.toLowerCase() &&
+            metadataTitleNoUnderscore.toLowerCase() === song.title.toLowerCase() &&
+            metadataArtistNoUnderscore.toLowerCase() === song.artist.toLowerCase() &&
+            metadata.year === song.year) {
+            return metadata.file;
+        }
     }
     
     // Fallback: try to construct filename
