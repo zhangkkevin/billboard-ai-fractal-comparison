@@ -230,6 +230,19 @@ function findAudioFile(song) {
             metadata.year === song.year) {
             return metadata.file;
         }
+        
+        // Additional fallback: try matching with periods and underscores normalized
+        const normalizedMetadataTitle = metadataTitle.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
+        const normalizedMetadataArtist = metadataArtist.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
+        const normalizedSongTitle = song.title.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
+        const normalizedSongArtist = song.artist.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
+        
+        if (metadata.model.toLowerCase() === song.model.toLowerCase() &&
+            normalizedMetadataTitle.toLowerCase() === normalizedSongTitle.toLowerCase() &&
+            normalizedMetadataArtist.toLowerCase() === normalizedSongArtist.toLowerCase() &&
+            metadata.year === song.year) {
+            return metadata.file;
+        }
     }
     
     // Fallback: try to construct filename
