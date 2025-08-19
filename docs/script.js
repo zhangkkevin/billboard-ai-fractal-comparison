@@ -44,7 +44,7 @@ const songData = {
         ],
         minSkew: [
             { model: "billboard", title: "Low", artist: "Flo Rida feat. T-Pain", year: 2008, rank: 1, value: "skew = -0.888" },
-            { model: "suno_v4_5", title: "Hips Don't Lie", artist: "Shakira feat. Wyclef Jean", year: 2006, rank: 5, value: "skew = -0.846" },
+            { model: "suno_v4_5", title: "Hips Dont Lie", artist: "Shakira feat. Wyclef Jean", year: 2006, rank: 5, value: "skew = -0.846" },
             { model: "diffrhythm", title: "Without Me", artist: "Halsey", year: 2019, rank: 3, value: "skew = -0.787" },
             { model: "YuE", title: "Blue Tango", artist: "Leroy Anderson", year: 1952, rank: 1, value: "skew = -0.729" }
         ]
@@ -174,7 +174,7 @@ const youtubeVideoIds = {
     
     // MFDFA Analysis - Min Skew
     "Low - Flo Rida feat. T-Pain": "CxPc1Q3-0zc",
-    "Hips Don't Lie - Shakira feat. Wyclef Jean": "DUT5rEU6pqM",
+    "Hips Dont Lie - Shakira feat. Wyclef Jean": "DUT5rEU6pqM",
     "Without Me - Halsey": "Y7dpJ0oseIA",
     "Blue Tango - Leroy Anderson": "8bfyS-S-TcA", // Placeholder
     
