@@ -16,7 +16,7 @@ const songData = {
         ],
         max: [
             { model: "billboard", title: "Rockstar", artist: "DaBaby feat. Roddy Ricch", year: 2020, rank: 5, value: "α = 1.267" },
-            { model: "suno_v4_5", title: "You're Beautiful", artist: "James Blunt", year: 2006, rank: 4, value: "α = 1.25" },
+            { model: "suno_v4_5", title: "Youre Beautiful", artist: "James Blunt", year: 2006, rank: 4, value: "α = 1.25" },
             { model: "diffrhythm", title: "Mona Lisa", artist: "Nat King Cole", year: 1950, rank: 2, value: "α = 1.257" },
             { model: "YuE", title: "Blue Tango", artist: "Leroy Anderson", year: 1952, rank: 1, value: "α = 1.413" }
         ]
@@ -150,7 +150,7 @@ const youtubeVideoIds = {
     
     // DFA Analysis - Max α
     "Rockstar - DaBaby feat. Roddy Ricch": "83xBPCw5hh4",
-    "You're Beautiful - James Blunt": "oofSnsGkops",
+    "Youre Beautiful - James Blunt": "oofSnsGkops",
     "Mona Lisa - Nat King Cole": "8bfyS-S-TcA", // Placeholder
     "Blue Tango - Leroy Anderson": "8bfyS-S-TcA", // Placeholder
     
