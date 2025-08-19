@@ -1,66 +1,91 @@
-// Audio Upload and Management System
-class AudioUploadManager {
+// Upload functionality
+class AudioUploader {
     constructor() {
-        this.uploadForm = document.getElementById('uploadForm');
+        this.uploadArea = document.getElementById('uploadArea');
+        this.fileInput = document.getElementById('fileInput');
         this.fileList = document.getElementById('fileList');
-        this.progressBar = document.getElementById('progressBar');
-        this.progressFill = document.getElementById('progressFill');
-        this.statusMessage = document.getElementById('statusMessage');
-        this.uploadBtn = document.getElementById('uploadBtn');
-        this.fileInput = document.getElementById('audio_file');
-        this.fileInfo = document.getElementById('file_info');
+        this.files = [];
         
-        this.init();
+        this.initializeEventListeners();
     }
     
-    init() {
-        this.setupEventListeners();
-        this.loadAudioFiles();
-    }
-    
-    setupEventListeners() {
-        // File input change handler
+    initializeEventListeners() {
+        // File input change
         this.fileInput.addEventListener('change', (e) => {
-            this.handleFileSelect(e);
+            this.handleFiles(e.target.files);
         });
         
-        // Form submission handler
-        this.uploadForm.addEventListener('submit', (e) => {
+        // Drag and drop
+        this.uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            this.handleUpload();
+            this.uploadArea.classList.add('dragover');
         });
         
-        // Category change handler to update value placeholder
-        document.getElementById('category').addEventListener('change', (e) => {
-            this.updateValuePlaceholder(e.target.value);
+        this.uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            this.uploadArea.classList.remove('dragover');
+        });
+        
+        this.uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            this.uploadArea.classList.remove('dragover');
+            this.handleFiles(e.dataTransfer.files);
+        });
+        
+        // Click to select
+        this.uploadArea.addEventListener('click', () => {
+            this.fileInput.click();
         });
     }
     
-    handleFileSelect(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const fileSize = this.formatFileSize(file.size);
-            const fileType = file.type;
-            this.fileInfo.textContent = `Selected: ${file.name} (${fileSize}, ${fileType})`;
-        } else {
-            this.fileInfo.textContent = '';
-        }
+    handleFiles(fileList) {
+        Array.from(fileList).forEach(file => {
+            if (file.type.startsWith('audio/')) {
+                this.addFile(file);
+            } else {
+                this.showError(`${file.name} is not an audio file`);
+            }
+        });
     }
     
-    updateValuePlaceholder(category) {
-        const valueInput = document.getElementById('value');
-        const placeholders = {
-            'closest': 'e.g., α = 1.0',
-            'min': 'e.g., α = 0.767',
-            'max': 'e.g., α = 1.267',
-            'max_width': 'e.g., α width = 4.874',
-            'min_width': 'e.g., α width = 0.218',
-            'max_skew': 'e.g., skew = 1.0',
-            'min_skew': 'e.g., skew = -0.888',
-            'best': 'e.g., JSD = 0.007',
-            'worst': 'e.g., JSD = 0.452'
+    addFile(file) {
+        const fileId = this.generateFileId();
+        const fileItem = {
+            id: fileId,
+            file: file,
+            name: file.name,
+            size: file.size,
+            status: 'pending'
         };
-        valueInput.placeholder = placeholders[category] || 'e.g., α = 1.0, JSD = 0.007';
+        
+        this.files.push(fileItem);
+        this.renderFileItem(fileItem);
+        this.uploadFile(fileItem);
+    }
+    
+    generateFileId() {
+        return 'file_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    renderFileItem(fileItem) {
+        const fileElement = document.createElement('div');
+        fileElement.className = 'file-item';
+        fileElement.id = fileItem.id;
+        
+        const fileSize = this.formatFileSize(fileItem.size);
+        
+        fileElement.innerHTML = `
+            <div class="file-info">
+                <div class="file-name">${fileItem.name}</div>
+                <div class="file-size">${fileSize}</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="file-status status-uploading">Uploading...</div>
+        `;
+        
+        this.fileList.appendChild(fileElement);
     }
     
     formatFileSize(bytes) {
@@ -71,177 +96,104 @@ class AudioUploadManager {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
     
-    async handleUpload() {
-        const formData = new FormData(this.uploadForm);
-        const file = this.fileInput.files[0];
-        
-        if (!file) {
-            this.showStatus('Please select an audio file.', 'error');
-            return;
-        }
-        
-        // Validate file type
-        if (!file.type.startsWith('audio/')) {
-            this.showStatus('Please select a valid audio file.', 'error');
-            return;
-        }
-        
-        // Validate file size (max 50MB)
-        if (file.size > 50 * 1024 * 1024) {
-            this.showStatus('File size must be less than 50MB.', 'error');
-            return;
-        }
-        
-        this.uploadBtn.disabled = true;
-        this.uploadBtn.textContent = 'Uploading...';
-        this.progressBar.style.display = 'block';
-        
+    async uploadFile(fileItem) {
         try {
-            // Simulate upload progress (in real implementation, this would be actual upload)
-            await this.simulateUpload(formData);
+            const formData = new FormData();
+            formData.append('audio', fileItem.file);
             
-            this.showStatus('Audio file uploaded successfully!', 'success');
-            this.uploadForm.reset();
-            this.fileInfo.textContent = '';
-            this.loadAudioFiles(); // Refresh the file list
+            // Simulate upload progress
+            const progressElement = document.querySelector(`#${fileItem.id} .progress-fill`);
+            const statusElement = document.querySelector(`#${fileItem.id} .file-status`);
+            
+            // Simulate progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress > 90) progress = 90;
+                progressElement.style.width = progress + '%';
+            }, 200);
+            
+            // In a real implementation, you would send the file to a server
+            // For now, we'll simulate a successful upload
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            clearInterval(progressInterval);
+            progressElement.style.width = '100%';
+            
+            // Update status
+            fileItem.status = 'success';
+            statusElement.textContent = 'Uploaded';
+            statusElement.className = 'file-status status-success';
+            
+            this.showSuccess(`${fileItem.name} uploaded successfully`);
             
         } catch (error) {
-            this.showStatus(`Upload failed: ${error.message}`, 'error');
-        } finally {
-            this.uploadBtn.disabled = false;
-            this.uploadBtn.textContent = 'Upload Audio File';
-            this.progressBar.style.display = 'none';
-            this.progressFill.style.width = '0%';
+            fileItem.status = 'error';
+            const statusElement = document.querySelector(`#${fileItem.id} .file-status`);
+            statusElement.textContent = 'Error';
+            statusElement.className = 'file-status status-error';
+            
+            this.showError(`Failed to upload ${fileItem.name}: ${error.message}`);
         }
     }
     
-    async simulateUpload(formData) {
-        return new Promise((resolve, reject) => {
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 15;
-                if (progress > 100) progress = 100;
-                
-                this.progressFill.style.width = progress + '%';
-                
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        // In a real implementation, this would be an actual file upload
-                        // For now, we'll just store the data locally
-                        this.saveAudioData(formData);
-                        resolve();
-                    }, 500);
-                }
-            }, 200);
-        });
+    showSuccess(message) {
+        this.showNotification(message, 'success');
     }
     
-    saveAudioData(formData) {
-        const audioData = {
-            id: Date.now(),
-            model: formData.get('model'),
-            title: formData.get('title'),
-            artist: formData.get('artist'),
-            year: formData.get('year'),
-            rank: formData.get('rank'),
-            analysis_type: formData.get('analysis_type'),
-            category: formData.get('category'),
-            value: formData.get('value'),
-            notes: formData.get('notes'),
-            filename: this.fileInput.files[0].name,
-            upload_date: new Date().toISOString(),
-            file_size: this.fileInput.files[0].size
-        };
-        
-        // Get existing data or initialize empty array
-        const existingData = JSON.parse(localStorage.getItem('audioFiles') || '[]');
-        existingData.push(audioData);
-        localStorage.setItem('audioFiles', JSON.stringify(existingData));
+    showError(message) {
+        this.showNotification(message, 'error');
     }
     
-    loadAudioFiles() {
-        const audioFiles = JSON.parse(localStorage.getItem('audioFiles') || '[]');
-        
-        if (audioFiles.length === 0) {
-            this.fileList.innerHTML = '<p>No audio files uploaded yet.</p>';
-            return;
-        }
-        
-        this.fileList.innerHTML = '';
-        
-        audioFiles.forEach(file => {
-            const fileItem = this.createFileItem(file);
-            this.fileList.appendChild(fileItem);
-        });
-    }
-    
-    createFileItem(file) {
-        const fileDiv = document.createElement('div');
-        fileDiv.className = 'file-item';
-        
-        fileDiv.innerHTML = `
-            <div class="file-info">
-                <div class="file-name">${file.title} - ${file.artist}</div>
-                <div class="file-meta">
-                    ${file.year}, Rank ${file.rank} • ${file.model} • ${file.analysis_type} • ${file.category}
-                    <br>${file.value} • ${this.formatFileSize(file.file_size)}
-                </div>
-            </div>
-            <div class="file-actions">
-                <button class="btn btn-play" onclick="audioManager.playAudio('${file.id}')">Play</button>
-                <button class="btn btn-delete" onclick="audioManager.deleteAudio('${file.id}')">Delete</button>
-            </div>
+    showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
         `;
         
-        return fileDiv;
-    }
-    
-    playAudio(fileId) {
-        const audioFiles = JSON.parse(localStorage.getItem('audioFiles') || '[]');
-        const file = audioFiles.find(f => f.id == fileId);
+        if (type === 'success') {
+            notification.style.background = '#38a169';
+        } else {
+            notification.style.background = '#e53e3e';
+        }
         
-        if (file) {
-            // In a real implementation, this would play the actual audio file
-            // For now, we'll show a message
-            this.showStatus(`Playing: ${file.title} by ${file.artist}`, 'success');
-            
-            // Create a temporary audio element (this would work with actual file URLs)
-            const audio = new Audio();
-            audio.src = `audio/${file.filename}`;
-            audio.play().catch(e => {
-                this.showStatus(`Audio playback failed: ${e.message}`, 'error');
-            });
-        }
-    }
-    
-    deleteAudio(fileId) {
-        if (confirm('Are you sure you want to delete this audio file?')) {
-            const audioFiles = JSON.parse(localStorage.getItem('audioFiles') || '[]');
-            const updatedFiles = audioFiles.filter(f => f.id != fileId);
-            localStorage.setItem('audioFiles', JSON.stringify(updatedFiles));
-            
-            this.showStatus('Audio file deleted successfully.', 'success');
-            this.loadAudioFiles(); // Refresh the list
-        }
-    }
-    
-    showStatus(message, type) {
-        this.statusMessage.textContent = message;
-        this.statusMessage.className = `status-message status-${type}`;
+        document.body.appendChild(notification);
         
         setTimeout(() => {
-            this.statusMessage.textContent = '';
-            this.statusMessage.className = 'status-message';
-        }, 5000);
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
     }
 }
 
-// Initialize the upload manager when the page loads
-let audioManager;
-document.addEventListener('DOMContentLoaded', function() {
-    audioManager = new AudioUploadManager();
-});
+// Add CSS animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
 
-// Export for use in other scripts
-window.AudioUploadManager = AudioUploadManager;
+// Initialize uploader when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    new AudioUploader();
+});

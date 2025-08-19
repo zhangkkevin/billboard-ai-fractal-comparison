@@ -1,3 +1,4 @@
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +6,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #333;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -15,256 +16,277 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 20px;
 }
 
+/* Header styles */
 header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 40px;
     color: white;
 }
 
-h1 {
-    font-size: 3rem;
+header h1 {
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
     opacity: 0.9;
+    font-weight: 300;
 }
 
-.description {
-    font-size: 1.1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    opacity: 0.8;
+/* Navigation */
+nav {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
+.nav-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+/* Main content */
 main {
     background: white;
-    border-radius: 20px;
-    padding: 2rem;
+    border-radius: 16px;
+    padding: 40px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
+    margin-bottom: 40px;
 }
 
 .analysis-section {
-    margin-bottom: 3rem;
+    margin-bottom: 50px;
 }
 
 .analysis-section h2 {
     font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
     color: #2d3748;
+    margin-bottom: 30px;
+    text-align: center;
     border-bottom: 3px solid #667eea;
-    padding-bottom: 0.5rem;
+    padding-bottom: 10px;
 }
 
-.analysis-section > p {
-    font-size: 1.1rem;
+.category {
+    margin-bottom: 40px;
+}
+
+.category h3 {
+    font-size: 1.3rem;
     color: #4a5568;
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
 }
 
-.results-grid {
+.song-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-.result-card {
-    background: #f7fafc;
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.result-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.result-card h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #2d3748;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 0.5rem;
-}
-
-.song-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
+/* Song item styles */
 .song-item {
-    background: white;
-    border-radius: 8px;
-    padding: 1rem;
-    border-left: 4px solid #667eea;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.song-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: #667eea;
+}
+
+.song-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
 }
 
 .song-title {
+    font-size: 1.2rem;
     font-weight: 600;
     color: #2d3748;
-    margin-bottom: 0.25rem;
+    margin-bottom: 5px;
 }
 
 .song-artist {
+    font-size: 1rem;
     color: #4a5568;
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: 8px;
 }
 
 .song-meta {
+    font-size: 0.9rem;
     color: #718096;
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .song-value {
-    background: #667eea;
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 6px;
     display: inline-block;
 }
 
-.audio-placeholder {
-    background: #e2e8f0;
-    border: 2px dashed #cbd5e0;
-    border-radius: 6px;
-    padding: 1rem;
-    text-align: center;
-    color: #718096;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
+/* Audio player styles */
 .audio-player {
-    margin-top: 0.5rem;
+    margin-top: 15px;
 }
 
 .audio-player audio {
     width: 100%;
     height: 40px;
-    border-radius: 6px;
+    border-radius: 8px;
     background: #f8f9fa;
+    border: 1px solid #e2e8f0;
 }
 
+.audio-placeholder {
+    text-align: center;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 8px;
+    color: #718096;
+    font-size: 0.9rem;
+    border: 2px dashed #cbd5e0;
+}
+
+/* YouTube embed styles */
 .youtube-embed {
-    margin-top: 0.5rem;
+    margin-top: 15px;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .youtube-embed iframe {
-    border-radius: 8px;
     width: 100%;
     height: 166px;
+    border: none;
 }
 
-.audio-info {
-    text-align: center;
-    margin-top: 0.5rem;
-    color: #718096;
-    font-size: 0.8rem;
+/* Model-specific styling */
+.model-billboard {
+    border-left: 4px solid #e53e3e;
 }
 
-.nav {
-    margin-top: 1rem;
+.model-billboard::before {
+    background: linear-gradient(90deg, #e53e3e, #c53030);
 }
 
-.nav-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #667eea;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: background-color 0.2s;
+.model-suno_v4_5 {
+    border-left: 4px solid #38a169;
 }
 
-.nav-link:hover {
-    background: #5a67d8;
-    color: white;
-    text-decoration: none;
+.model-suno_v4_5::before {
+    background: linear-gradient(90deg, #38a169, #2f855a);
 }
 
+.model-diffrhythm {
+    border-left: 4px solid #3182ce;
+}
+
+.model-diffrhythm::before {
+    background: linear-gradient(90deg, #3182ce, #2c5282);
+}
+
+.model-yue {
+    border-left: 4px solid #d69e2e;
+}
+
+.model-yue::before {
+    background: linear-gradient(90deg, #d69e2e, #b7791f);
+}
+
+/* Footer */
 footer {
     text-align: center;
     color: white;
     opacity: 0.8;
+    font-size: 0.9rem;
 }
 
 footer p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 5px;
 }
 
-footer a {
-    color: #fbbf24;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive Design */
+/* Responsive design */
 @media (max-width: 768px) {
     .container {
-        padding: 1rem;
+        padding: 15px;
     }
     
-    h1 {
+    header h1 {
         font-size: 2rem;
     }
     
-    .subtitle {
-        font-size: 1.2rem;
-    }
-    
     main {
-        padding: 1rem;
+        padding: 20px;
     }
     
-    .results-grid {
+    .song-grid {
         grid-template-columns: 1fr;
     }
     
-    .result-card {
-        padding: 1rem;
+    .analysis-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .category h3 {
+        font-size: 1.1rem;
     }
 }
 
-/* Model-specific colors */
-.model-billboard {
-    border-left-color: #3182ce;
-}
-
-.model-suno {
-    border-left-color: #38a169;
-}
-
-.model-diffrhythm {
-    border-left-color: #d69e2e;
-}
-
-.model-yue {
-    border-left-color: #e53e3e;
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    main {
+        padding: 15px;
+    }
+    
+    .song-item {
+        padding: 15px;
+    }
 }
