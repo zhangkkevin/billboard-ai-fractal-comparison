@@ -253,18 +253,11 @@ function getYouTubeEmbed(song) {
 // Function to load audio metadata
 async function loadAudioMetadata() {
     try {
-        const response = await fetch('audio_metadata.json?v=6');
+        const response = await fetch('audio_metadata.json?v=5');
         if (response.ok) {
             const metadata = await response.json();
             window.audioMetadata = metadata;
             console.log(`Loaded metadata for ${Object.keys(metadata.files || {}).length} audio files`);
-            
-            // Debug: Log first few entries
-            const entries = Object.entries(metadata.files || {});
-            console.log('First 3 metadata entries:');
-            entries.slice(0, 3).forEach(([id, data]) => {
-                console.log(`  ${data.song} -> ${data.file}`);
-            });
         } else {
             console.log('No audio metadata file found, using fallback filename matching');
             window.audioMetadata = {};
