@@ -253,7 +253,7 @@ function getYouTubeEmbed(song) {
 // Function to load audio metadata
 async function loadAudioMetadata() {
     try {
-        const response = await fetch('audio_metadata.json?v=5');
+        const response = await fetch('audio_metadata.json?v=7');
         if (response.ok) {
             const metadata = await response.json();
             window.audioMetadata = metadata;
