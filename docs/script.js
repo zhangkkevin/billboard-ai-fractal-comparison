@@ -143,41 +143,30 @@ function findAudioFile(song) {
     for (const [fileId, metadata] of Object.entries(audioMetadata.files || {})) {
         // Parse the song field to extract title and artist
         const songParts = metadata.song.split(' - ');
-        const metadataTitle = songParts[0] ? songParts[0].replace(/_/g, ' ') : '';
-        const metadataArtist = songParts[1] ? songParts[1].replace(/_/g, ' ') : '';
+        const metadataTitle = songParts[0] || '';
+        const metadataArtist = songParts[1] || '';
         
+        // Normalize both metadata and song data for comparison
+        const normalizeString = (str) => {
+            return str.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+        };
+        
+        const normalizedMetadataTitle = normalizeString(metadataTitle);
+        const normalizedMetadataArtist = normalizeString(metadataArtist);
+        const normalizedSongTitle = normalizeString(song.title);
+        const normalizedSongArtist = normalizeString(song.artist);
+        
+        // Check if model, title, artist, and year match
         if (metadata.model.toLowerCase() === song.model.toLowerCase() &&
-            metadataTitle.toLowerCase() === song.title.toLowerCase() &&
-            metadataArtist.toLowerCase() === song.artist.toLowerCase() &&
+            normalizedMetadataTitle === normalizedSongTitle &&
+            normalizedMetadataArtist === normalizedSongArtist &&
             metadata.year === song.year) {
-            return metadata.file;
-        }
-        
-        // Try matching with underscores replaced by spaces
-        const metadataTitleNoUnderscore = metadataTitle.replace(/_/g, ' ');
-        const metadataArtistNoUnderscore = metadataArtist.replace(/_/g, ' ');
-        
-        if (metadata.model.toLowerCase() === song.model.toLowerCase() &&
-            metadataTitleNoUnderscore.toLowerCase() === song.title.toLowerCase() &&
-            metadataArtistNoUnderscore.toLowerCase() === song.artist.toLowerCase() &&
-            metadata.year === song.year) {
-            return metadata.file;
-        }
-        
-        // Additional fallback: try matching with periods and underscores normalized
-        const normalizedMetadataTitle = metadataTitle.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
-        const normalizedMetadataArtist = metadataArtist.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
-        const normalizedSongTitle = song.title.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
-        const normalizedSongArtist = song.artist.replace(/[._]/g, ' ').replace(/\s+/g, ' ').trim();
-        
-        if (metadata.model.toLowerCase() === song.model.toLowerCase() &&
-            normalizedMetadataTitle.toLowerCase() === normalizedSongTitle.toLowerCase() &&
-            normalizedMetadataArtist.toLowerCase() === normalizedSongArtist.toLowerCase() &&
-            metadata.year === song.year) {
+            console.log(`Found match: ${metadata.file} for ${song.title} - ${song.artist}`);
             return metadata.file;
         }
     }
     
+    console.log(`No match found for: ${song.title} - ${song.artist} (${song.model}, ${song.year})`);
     return null;
 }
 
@@ -251,11 +240,18 @@ function getYouTubeEmbed(song) {
 // Function to load audio metadata
 async function loadAudioMetadata() {
     try {
-        const response = await fetch('audio_metadata.json?v=2');
+        const response = await fetch('audio_metadata.json?v=3');
         if (response.ok) {
             const metadata = await response.json();
             window.audioMetadata = metadata;
             console.log(`Loaded metadata for ${Object.keys(metadata.files || {}).length} audio files`);
+            
+            // Debug: Log first few entries
+            const entries = Object.entries(metadata.files || {});
+            console.log('First 3 metadata entries:');
+            entries.slice(0, 3).forEach(([id, data]) => {
+                console.log(`  ${data.song} -> ${data.file}`);
+            });
         } else {
             console.log('No audio metadata file found, using fallback filename matching');
             window.audioMetadata = {};
