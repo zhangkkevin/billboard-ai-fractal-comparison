@@ -10,7 +10,7 @@ const songData = {
         ],
         min: [
             { model: "billboard", title: "Let Me Love You", artist: "Mario", year: 2005, rank: 3, value: "α = 0.767" },
-            { model: "suno_v4_5", title: "Love's Theme", artist: "Love Unlimited Orchestra", year: 1974, rank: 3, value: "α = 0.679" },
+            { model: "suno_v4_5", title: "Loves Theme", artist: "Love Unlimited Orchestra", year: 1974, rank: 3, value: "α = 0.679" },
             { model: "diffrhythm", title: "Hanging By A Moment", artist: "Lifehouse", year: 2001, rank: 1, value: "α = 0.702" },
             { model: "YuE", title: "Harlem Shake", artist: "Baauer", year: 2013, rank: 4, value: "α = 0.721" }
         ],
@@ -27,17 +27,17 @@ const songData = {
         maxWidth: [
             { model: "billboard", title: "Sugar", artist: "Maroon 5", year: 2015, rank: 5, value: "α width = 4.874" },
             { model: "suno_v4_5", title: "The Yellow Rose of Texas", artist: "Mitch Miller", year: 1955, rank: 3, value: "α width = 4.716" },
-            { model: "diffrhythm", title: "When I'm Gone", artist: "3 Doors Down", year: 2003, rank: 5, value: "α width = 3.399" },
+            { model: "diffrhythm", title: "When Im Gone", artist: "3 Doors Down", year: 2003, rank: 5, value: "α width = 3.399" },
             { model: "YuE", title: "The Sweet Escape", artist: "Gwen Stefani feat. Akon", year: 2007, rank: 3, value: "α width = 5.334" }
         ],
         minWidth: [
             { model: "billboard", title: "Dark Horse", artist: "Katy Perry and Juicy J", year: 2014, rank: 2, value: "α width = 0.218" },
             { model: "suno_v4_5", title: "Hot in Herre", artist: "Nelly", year: 2002, rank: 3, value: "α width = 0.59" },
-            { model: "diffrhythm", title: "Auf Wiederseh'n Sweetheart", artist: "Vera Lynn", year: 1952, rank: 5, value: "α width = 0.837" },
+            { model: "diffrhythm", title: "Auf Wiedersehn Sweetheart", artist: "Vera Lynn", year: 1952, rank: 5, value: "α width = 0.837" },
             { model: "YuE", title: "rockstar", artist: "Post Malone feat. 21 Savage", year: 2018, rank: 5, value: "α width = 0.382" }
         ],
         maxSkew: [
-            { model: "billboard", title: "Auf Wiederseh'n Sweetheart", artist: "Vera Lynn", year: 1952, rank: 5, value: "skew = 1.0" },
+            { model: "billboard", title: "Auf Wiedersehn Sweetheart", artist: "Vera Lynn", year: 1952, rank: 5, value: "skew = 1.0" },
             { model: "suno_v4_5", title: "Good 4 U", artist: "Olivia Rodrigo", year: 2021, rank: 5, value: "skew = 0.833" },
             { model: "diffrhythm", title: "Poker Face", artist: "Lady Gaga", year: 2009, rank: 2, value: "skew = 0.924" },
             { model: "YuE", title: "Honey", artist: "Bobby Goldsboro", year: 1968, rank: 3, value: "skew = 1.0" }
@@ -156,17 +156,30 @@ function findAudioFile(song) {
         const normalizedSongTitle = normalizeString(song.title);
         const normalizedSongArtist = normalizeString(song.artist);
         
+        // Debug: Log what we're comparing
+        console.log(`Comparing: "${normalizedSongTitle}" - "${normalizedSongArtist}" vs "${normalizedMetadataTitle}" - "${normalizedMetadataArtist}"`);
+        
         // Check if model, title, artist, and year match
         if (metadata.model.toLowerCase() === song.model.toLowerCase() &&
             normalizedMetadataTitle === normalizedSongTitle &&
             normalizedMetadataArtist === normalizedSongArtist &&
             metadata.year === song.year) {
-            console.log(`Found match: ${metadata.file} for ${song.title} - ${song.artist}`);
+            console.log(`✅ Found match: ${metadata.file} for ${song.title} - ${song.artist}`);
             return metadata.file;
         }
     }
     
-    console.log(`No match found for: ${song.title} - ${song.artist} (${song.model}, ${song.year})`);
+    console.log(`❌ No match found for: ${song.title} - ${song.artist} (${song.model}, ${song.year})`);
+    
+    // Debug: Show all available files for this model
+    const availableFiles = Object.entries(audioMetadata.files || {})
+        .filter(([id, data]) => data.model.toLowerCase() === song.model.toLowerCase())
+        .map(([id, data]) => `${data.song} (${data.year})`);
+    
+    if (availableFiles.length > 0) {
+        console.log(`Available files for ${song.model}:`, availableFiles);
+    }
+    
     return null;
 }
 
@@ -240,7 +253,7 @@ function getYouTubeEmbed(song) {
 // Function to load audio metadata
 async function loadAudioMetadata() {
     try {
-        const response = await fetch('audio_metadata.json?v=3');
+        const response = await fetch('audio_metadata.json?v=4');
         if (response.ok) {
             const metadata = await response.json();
             window.audioMetadata = metadata;
