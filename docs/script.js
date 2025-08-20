@@ -193,7 +193,7 @@ const youtubeVideoIds = {
     
     // DFA Analysis - Min α
     "Let Me Love You - Mario": "mbG5fhlMdrI",
-    "Love's Theme - Love Unlimited Orchestra": "8bfyS-S-TcA", // Placeholder
+    "Loves Theme - Love Unlimited Orchestra": "8bfyS-S-TcA", // Placeholder
     "Hanging By A Moment - Lifehouse": "t4QK8RxCAwo",
     "Harlem Shake - Baauer": "8UFIYGkROII",
     
@@ -206,17 +206,17 @@ const youtubeVideoIds = {
     // MFDFA Analysis - Max Width
     "Sugar - Maroon 5": "N1BcpzPGlYQ",
     "The Yellow Rose of Texas - Mitch Miller": "8bfyS-S-TcA", // Placeholder
-    "When I'm Gone - 3 Doors Down": "kXYiU_JCYtU",
+    "When Im Gone - 3 Doors Down": "kXYiU_JCYtU",
     "The Sweet Escape - Gwen Stefani feat. Akon": "OJB8ZjGJ8YI",
     
     // MFDFA Analysis - Min Width
     "Dark Horse - Katy Perry and Juicy J": "ONb4aTtG6Ps",
     "Hot in Herre - Nelly": "GeZZr_p6vB8",
-    "Auf Wiederseh'n Sweetheart - Vera Lynn": "8bfyS-S-TcA", // Placeholder
+    "Auf Wiedersehn Sweetheart - Vera Lynn": "8bfyS-S-TcA", // Placeholder
     "rockstar - Post Malone feat. 21 Savage": "UceaB4D0jpo",
     
     // MFDFA Analysis - Max Skew
-    "Auf Wiederseh'n Sweetheart - Vera Lynn": "36prRdWCqu0", // Placeholder
+    "Auf Wiedersehn Sweetheart - Vera Lynn": "36prRdWCqu0", // Placeholder
     "Good 4 U - Olivia Rodrigo": "gNi_6U5Pm_o",
     "Poker Face - Lady Gaga": "bESGLojNYSo",
     "Honey - Bobby Goldsboro": "8bfyS-S-TcA", // Placeholder
@@ -253,7 +253,7 @@ function getYouTubeEmbed(song) {
 // Function to load audio metadata
 async function loadAudioMetadata() {
     try {
-        const response = await fetch('audio_metadata.json?v=4');
+        const response = await fetch('audio_metadata.json?v=5');
         if (response.ok) {
             const metadata = await response.json();
             window.audioMetadata = metadata;
