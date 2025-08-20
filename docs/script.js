@@ -88,10 +88,13 @@ function createSongItem(song) {
 
 // Function to get appropriate audio player for a song
 function getAudioPlayer(song) {
+    console.log('Getting audio player for song:', song.title, 'by', song.artist, 'model:', song.model);
+    
     // For Billboard music, use YouTube embeds
     if (song.model.toLowerCase() === 'billboard') {
         const youtubeEmbed = getYouTubeEmbed(song);
         if (youtubeEmbed) {
+            console.log('Using YouTube embed for Billboard song');
             return `
                 <div class="youtube-embed">
                     <iframe 
@@ -106,6 +109,7 @@ function getAudioPlayer(song) {
                 </div>
             `;
         } else {
+            console.log('YouTube embed not found for Billboard song');
             return `
                 <div class="audio-placeholder">
                     🎵 YouTube video not available
@@ -117,6 +121,7 @@ function getAudioPlayer(song) {
     
     // For AI-generated music, use audio files
     const audioFile = findAudioFile(song);
+    console.log('Audio file found:', audioFile);
     if (audioFile) {
         return `
             <audio controls preload="metadata" style="width: 100%;">
@@ -246,11 +251,14 @@ function populateSection(sectionId, songs) {
 // Function to load audio metadata
 async function loadAudioMetadata() {
     try {
+        console.log('Loading audio metadata...');
         const response = await fetch('audio_metadata.json?v=5');
+        console.log('Metadata response status:', response.status);
         if (response.ok) {
             const metadata = await response.json();
             window.audioMetadata = metadata;
             console.log(`Loaded metadata for ${Object.keys(metadata.files || {}).length} audio files`);
+            console.log('Metadata keys:', Object.keys(metadata.files || {}));
         } else {
             console.log('No audio metadata file found, using fallback filename matching');
             window.audioMetadata = {};
