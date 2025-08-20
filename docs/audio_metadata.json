@@ -1,0 +1,196 @@
+{
+  "files": {
+    "afe1c730e9a2d38c04436527da297bd6": {
+      "file": "suno_v4_5_2023_4_Taylor_Swift_Anti-Hero.mp3",
+      "song": "Anti-Hero - Taylor_Swift",
+      "year": 2023,
+      "rank": 4,
+      "model": "suno_v4_5",
+      "size": 3847893
+    },
+    "386f67b1491307e8327724bc1bfeb7a2": {
+      "file": "diffrhythm_1958_2b_The_Everly_Brothers_Claudette.mp3",
+      "song": "Claudette - The_Everly_Brothers",
+      "year": 1958,
+      "rank": "2b",
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "f798836f30422dbd3ca56b00d9c1e628": {
+      "file": "YuE_1957_1_Elvis_Presley_All_Shook_Up.mp3",
+      "song": "All_Shook_Up - Elvis_Presley",
+      "year": 1957,
+      "rank": 1,
+      "model": "YuE",
+      "size": 796942
+    },
+    "5e41f5935cf1170d6ba518179fe8fe80": {
+      "file": "suno_v4_5_1974_3_Love_Unlimited_Orchestra_Loves_Theme.mp3",
+      "song": "Loves_Theme - Love_Unlimited_Orchestra",
+      "year": 1974,
+      "rank": 3,
+      "model": "suno_v4_5",
+      "size": 7641213
+    },
+    "c712a7ecd18e1f0bf701dec871841560": {
+      "file": "diffrhythm_2001_1_Lifehouse_Hanging_By_A_Moment.mp3",
+      "song": "Hanging_By_A_Moment - Lifehouse",
+      "year": 2001,
+      "rank": 1,
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "6dd520a56f7b119c17b5a851100c441e": {
+      "file": "YuE_2013_4_Baauer_Harlem_Shake.mp3",
+      "song": "Harlem_Shake - Baauer",
+      "year": 2013,
+      "rank": 4,
+      "model": "YuE",
+      "size": 1003931
+    },
+    "8853a3ac1506784fa179c883736a0028": {
+      "file": "suno_v4_5_2006_4_James_Blunt_Youre_Beautiful.mp3",
+      "song": "Youre_Beautiful - James_Blunt",
+      "year": 2006,
+      "rank": 4,
+      "model": "suno_v4_5",
+      "size": 3515685
+    },
+    "e120672f28bec744ff1d0cab89a8b7b7": {
+      "file": "diffrhythm_1950_2_Nat_King_Cole_Mona_Lisa.mp3",
+      "song": "Mona_Lisa - Nat_King_Cole",
+      "year": 1950,
+      "rank": 2,
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "69b50abbe43925790b31bef408becc8e": {
+      "file": "YuE_1952_1_Leroy_Anderson_Blue_Tango.mp3",
+      "song": "Blue_Tango - Leroy_Anderson",
+      "year": 1952,
+      "rank": 1,
+      "model": "YuE",
+      "size": 443680
+    },
+    "500a1aaf684a2f4282128587c2477183": {
+      "file": "suno_v4_5_1955_3_Mitch_Miller_The_Yellow_Rose_of_Texas.mp3",
+      "song": "The_Yellow_Rose_of_Texas - Mitch_Miller",
+      "year": 1955,
+      "rank": 3,
+      "model": "suno_v4_5",
+      "size": 2980317
+    },
+    "0f76658085b791ccce5a28ce01b91d9d": {
+      "file": "diffrhythm_2003_5_3_Doors_Down_When_Im_Gone.mp3",
+      "song": "When_Im_Gone - 3_Doors_Down",
+      "year": 2003,
+      "rank": 5,
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "eb4510e484d1f060fe79333f43f4f077": {
+      "file": "YuE_2007_3_Gwen_Stefani_feat._Akon_The_Sweet_Escape.mp3",
+      "song": "The_Sweet_Escape - Gwen_Stefani_feat._Akon",
+      "year": 2007,
+      "rank": 3,
+      "model": "YuE",
+      "size": 963304
+    },
+    "f61957526760dfb1d1cbfb4be788a204": {
+      "file": "suno_v4_5_2002_3_Nelly_Hot_in_Herre.mp3",
+      "song": "Hot_in_Herre - Nelly",
+      "year": 2002,
+      "rank": 3,
+      "model": "suno_v4_5",
+      "size": 3344925
+    },
+    "93f20138b4293983d618f89cc2776311": {
+      "file": "diffrhythm_1952_5_Vera_Lynn_Auf_Wiedersehn_Sweetheart.mp3",
+      "song": "Auf_Wiedersehn_Sweetheart - Vera_Lynn",
+      "year": 1952,
+      "rank": 5,
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "e23f0800e68ec90124e641063f54838b": {
+      "file": "YuE_2018_5_Post_Malone_feat._21_Savage_rockstar.mp3",
+      "song": "rockstar - Post_Malone_feat._21_Savage",
+      "year": 2018,
+      "rank": 5,
+      "model": "YuE",
+      "size": 753292
+    },
+    "b781857d325f1c945d1dbb097867e8b0": {
+      "file": "suno_v4_5_2021_5_Olivia_Rodrigo_Good_4_U.mp3",
+      "song": "Good_4_U - Olivia_Rodrigo",
+      "year": 2021,
+      "rank": 5,
+      "model": "suno_v4_5",
+      "size": 3607389
+    },
+    "6652471e147aa8d8b3812965ccd9cfe4": {
+      "file": "diffrhythm_2009_2_Lady_Gaga_Poker_Face.mp3",
+      "song": "Poker_Face - Lady_Gaga",
+      "year": 2009,
+      "rank": 2,
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "d8233d7f147d5366777b90b98d442b20": {
+      "file": "YuE_1968_3_Bobby_Goldsboro_Honey.mp3",
+      "song": "Honey - Bobby_Goldsboro",
+      "year": 1968,
+      "rank": 3,
+      "model": "YuE",
+      "size": 806684
+    },
+    "591c6e8c739b1ba70aa0c523d15fe4e3": {
+      "file": "suno_v4_5_2006_5_Shakira_feat._Wyclef_Jean_Hips_Dont_Lie.mp3",
+      "song": "Hips_Dont_Lie - Shakira_feat._Wyclef_Jean",
+      "year": 2006,
+      "rank": 5,
+      "model": "suno_v4_5",
+      "size": 4362165
+    },
+    "c133c4e84361e27621a365a90b2db568": {
+      "file": "diffrhythm_2019_3_Halsey_Without_Me.mp3",
+      "song": "Without_Me - Halsey",
+      "year": 2019,
+      "rank": 3,
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "9c93419ed46b1133cf2dd59147724694": {
+      "file": "suno_v4_5_1992_1_Boyz_II_Men_End_of_the_Road.mp3",
+      "song": "End_of_the_Road - Boyz_II_Men",
+      "year": 1992,
+      "rank": 1,
+      "model": "suno_v4_5",
+      "size": 3499197
+    },
+    "d42f0c97b30105b2a5c804736045b4d8": {
+      "file": "diffrhythm_2019_4_Billie_Eilish_Bad_Guy.mp3",
+      "song": "Bad_Guy - Billie_Eilish",
+      "year": 2019,
+      "rank": 4,
+      "model": "diffrhythm",
+      "size": 1522669
+    },
+    "ecc4bd94a057f41b07cb50de5eb44742": {
+      "file": "YuE_2015_1_Mark_Ronson_feat._Bruno_Mars_Uptown_Funk.mp3",
+      "song": "Uptown_Funk - Mark_Ronson_feat._Bruno_Mars",
+      "year": 2015,
+      "rank": 1,
+      "model": "YuE",
+      "size": 862825
+    },
+    "c25349342b02a3a83bc59cbab1ffa6e1": {
+      "file": "YuE_1989_4_Paula_Abdul_Straight_Up.mp3",
+      "song": "Straight_Up - Paula_Abdul",
+      "year": 1989,
+      "rank": 4,
+      "model": "YuE",
+      "size": 695124
+    }
+  }
+}// Force redeploy

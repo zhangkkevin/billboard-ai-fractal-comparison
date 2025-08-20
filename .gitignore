@@ -7,6 +7,9 @@ results/
 *.csv
 *.json
 
+# Keep audio metadata for website
+!docs/audio_metadata.json
+
 # Keep reference data for reproducibility
 !reference_data/
 !reference_data/**/*.csv
