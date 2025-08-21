@@ -96,7 +96,7 @@ function getAudioPlayer(song) {
         if (youtubeEmbed) {
             console.log('Using YouTube embed for Billboard song');
             return `
-                <div class="youtube-embed">
+                <div class="youtube-embed" id="youtube-${song.title.replace(/\s+/g, '-')}">
                     <iframe 
                         width="100%" 
                         height="166" 
@@ -106,8 +106,8 @@ function getAudioPlayer(song) {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen
                         onload="console.log('YouTube iframe loaded successfully: ${song.title}')"
-                        onerror="console.error('YouTube iframe failed to load: ${song.title}')"
-                        onabort="console.error('YouTube iframe aborted: ${song.title}')">
+                        onerror="handleYouTubeError('${song.title}', '${song.artist}')"
+                        onabort="handleYouTubeError('${song.title}', '${song.artist}')">
                     </iframe>
                     <div class="youtube-info">
                         <small>YouTube: ${song.title} by ${song.artist}</small>
@@ -146,9 +146,10 @@ function getAudioPlayer(song) {
 }
 
 // YouTube video ID mapping for Billboard songs
+// Updated with videos that allow embedding
 const youtubeVideoIds = {
     // DFA Analysis - Closest to α=1.0
-    "Bad Day - Daniel Powter": "eN_SVw-yyhA",
+    "Bad Day - Daniel Powter": "9HZ5DpFyQqE", // Alternative version that allows embedding
     
     // DFA Analysis - Min α
     "Let Me Love You - Mario": "mbG5fhlMdrI",
@@ -276,7 +277,7 @@ function populateSection(sectionId, songs) {
 async function loadAudioMetadata() {
     try {
         console.log('Loading audio metadata...');
-        const response = await fetch('audio_metadata.json?v=8');
+        const response = await fetch('audio_metadata.json?v=9');
         console.log('Metadata response status:', response.status);
         if (response.ok) {
             const metadata = await response.json();
@@ -298,6 +299,25 @@ function isLocalhost() {
     return window.location.hostname === 'localhost' || 
            window.location.hostname === '127.0.0.1' || 
            window.location.hostname === '';
+}
+
+// Function to handle YouTube video loading errors
+function handleYouTubeError(title, artist) {
+    console.error(`YouTube iframe failed to load: ${title} by ${artist}`);
+    
+    // Find the YouTube container and replace with error message
+    const containerId = `youtube-${title.replace(/\s+/g, '-')}`;
+    const container = document.getElementById(containerId);
+    
+    if (container) {
+        container.innerHTML = `
+            <div class="audio-placeholder">
+                🎵 YouTube video unavailable
+                <br><small>${title} by ${artist}</small>
+                <br><small>(Video may be restricted or removed)</small>
+            </div>
+        `;
+    }
 }
 
 // Initialize the page when DOM is loaded
