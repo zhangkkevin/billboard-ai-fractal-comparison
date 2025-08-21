@@ -1,7 +1,8 @@
 # Billboard AI Fractal Comparison
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
 
 This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music, as described in the paper:
 
@@ -20,34 +21,38 @@ This repository contains code and data for performing fractal analysis (DFA and 
 - [Analysis Parameters](#analysis-parameters)
 - [Results](#results)
 - [Citation](#citation)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## 🎯 Overview
 
-This project analyzes the fractal properties of music amplitude envelopes using:
+This project analyzes the fractal properties of music amplitude envelopes using advanced time series analysis techniques:
 
-- **Detrended Fluctuation Analysis (DFA)** - Measures long-range correlations in time series
-- **Multifractal Detrended Fluctuation Analysis (MFDFA)** - Analyzes scaling behavior across different fluctuation magnitudes
+- **Detrended Fluctuation Analysis (DFA)** - Measures long-range correlations in music amplitude envelopes
+- **Multifractal Detrended Fluctuation Analysis (MFDFA)** - Analyzes complex scaling behavior across different fluctuation magnitudes
 
 ### Analysis Comparison
 
-| Dataset | Description | Time Period |
-|---------|-------------|-------------|
-| **Billboard Top 5** | Human-created music | 1950-2024 |
-| **Suno v4.5** | AI-generated music | - |
-| **DiffRhythm** | AI-generated music | - |
-| **YuE** | AI-generated music | - |
+The analysis compares:
+- **Billboard Top 5 songs** (1950-2024) - Human-created music
+- **AI-generated music** from multiple models:
+  - **Suno v4.5** - Latest AI music generation model
+  - **DiffRhythm** - Diffusion-based music generation
+  - **YuE** - Neural music synthesis model
 
 ### Key Findings
 
-- **DFA Analysis**: Identifies songs with α values closest to 1.0 (random walk), minimum α (anti-persistent), and maximum α (persistent)
-- **MFDFA Analysis**: Reveals complex scaling behavior through α-width, spectrum skew, and truncation patterns
+- **DFA Analysis**: Identifies songs closest to α=1.0 (random walk), minimum α (anti-persistent), and maximum α (persistent)
+- **MFDFA Analysis**: Reveals maximum/minimum width and skew spectrum examples
 - **JSD Comparison**: Quantifies similarity between AI-generated and Billboard music patterns
+- **Copyright-compliant**: Uses YouTube embeds for original music, local files for AI-generated content
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Python 3.10 or higher
+- Python 3.10+
+- Conda or pip package manager
 - FFmpeg (for audio processing)
 
 ### Installation
@@ -58,15 +63,10 @@ This project analyzes the fractal properties of music amplitude envelopes using:
    cd billboard-ai-fractal-comparison
    ```
 
-2. **Create and activate a virtual environment**
+2. **Create and activate conda environment**
    ```bash
-   # Using conda (recommended)
    conda create -n fractal_analysis python=3.10
    conda activate fractal_analysis
-   
-   # Or using venv
-   python -m venv fractal_analysis
-   source fractal_analysis/bin/activate  # On Windows: fractal_analysis\Scripts\activate
    ```
 
 3. **Install dependencies**
@@ -74,95 +74,136 @@ This project analyzes the fractal properties of music amplitude envelopes using:
    pip install -r requirements.txt
    ```
 
-## 📊 Usage
+## 📦 Installation
+
+### Option 1: Using requirements.txt (Recommended)
+
+```bash
+pip install -r requirements.txt
+```
+
+### Option 2: Manual installation
+
+```bash
+pip install numpy pandas scipy matplotlib seaborn nolds MFDFA tqdm pydub scikit-learn librosa tinytag
+```
+
+### System Dependencies
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update
+sudo apt-get install ffmpeg
+```
+
+**macOS:**
+```bash
+brew install ffmpeg
+```
+
+**Windows:**
+Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
+
+## 🔧 Usage
 
 ### Running Analysis Scripts
 
-#### DFA Analysis
+#### 1. DFA Analysis
 ```bash
-python analysis/dfa_batch_amplitude_envelope.py
+python analysis/dfa_batch_amplitude_envelope_clean.py
 ```
 
-#### MFDFA Analysis
+#### 2. MFDFA Analysis
 ```bash
-python analysis/mfdfa_batch_amplitude_envelope.py
+python analysis/mfdfa_batch_amplitude_envelope_clean.py
 ```
 
 ### Jupyter Notebooks
 
-For detailed analysis and visualization:
+For interactive analysis and visualization:
 
 ```bash
-jupyter notebook notebooks/
+jupyter lab
+# or
+jupyter notebook
 ```
 
-- `dfa_music_structure.ipynb` - DFA analysis and visualization
-- `mfdfa_music_structure.ipynb` - MFDFA analysis and visualization
+Available notebooks:
+- `notebooks/dfa_music_structure.ipynb` - DFA analysis and visualization
+- `notebooks/mfdfa_music_structure.ipynb` - MFDFA analysis and visualization
+
+### Configuration
+
+Before running analysis, configure your audio data paths in the analysis scripts:
+
+```python
+AUDIO_ROOTS = {
+    "billboard": "path/to/billboard/audio",
+    "suno_v4_5": "path/to/suno/audio", 
+    "diffrhythm": "path/to/diffrhythm/audio",
+    "yue": "path/to/yue/audio"
+}
+```
 
 ## 📁 Data Structure
 
-### Audio Files Organization
+### Required Directory Structure
 
 ```
 audio_data/
 ├── billboard/
 │   └── non_separated/
 │       └── full_duration/
-│           └── YYYY_POSITION_ARTIST_TITLE.mp3
 ├── suno_v4_5/
-│   └── full/
-│       └── non_separated/
+│   └── non_separated/
 ├── diffrhythm/
-└── YuE/
+└── yue/
     └── non_separated/
 ```
 
 ### File Naming Convention
 
-Audio files should follow the pattern: `YYYY_POSITION_ARTIST_TITLE.mp3`
-
-**Example**: `2020_01_Taylor Swift_Cardigan.mp3`
-
-### Output Structure
-
+Audio files should follow this naming pattern:
 ```
-results/
-├── amplitude_envelope/
-│   ├── dfa/
-│   │   └── smooth_ms_25_downsample_150_hz/
-│   │       ├── billboard_full.csv
-│   │       ├── suno_batch_1_full.csv
-│   │       ├── diffrhythm_full.csv
-│   │       └── yue_full.csv
-│   └── mfdfa/
-│       ├── billboard_mfdfa_summary.csv
-│       ├── suno_batch_1_mfdfa_summary.csv
-│       ├── diffrhythm_mfdfa_summary.csv
-│       └── yue_mfdfa_summary.csv
+YYYY_POSITION_ARTIST_TITLE.mp3
 ```
+
+Examples:
+- `2020_01_Taylor Swift_Cardigan.mp3`
+- `1958_02_Elvis Presley_All Shook Up.mp3`
+
+### Data Access
+
+Due to copyright restrictions, Billboard audio files are not included in this repository. AI-generated audio samples are available on Zenodo: [Link to be added]
 
 ## ⚙️ Analysis Parameters
 
 ### DFA Parameters
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| Smoothing window | 25ms | Temporal smoothing of amplitude envelope |
-| Target sample rate | 150 Hz | Downsampled rate for analysis |
-| Original sample rate | 22050 Hz | Input audio sample rate |
-| DFA order | 1 | Linear detrending |
+- **Smoothing window**: 25ms
+- **Target sample rate**: 150 Hz
+- **Original sample rate**: 22050 Hz
+- **DFA order**: 1 (linear detrending)
+- **Overlap**: True
+- **Fit trend**: Polynomial
 
 ### MFDFA Parameters
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| Smoothing window | 25ms | Temporal smoothing of amplitude envelope |
-| Target sample rate | 150 Hz | Downsampled rate for analysis |
-| Q-values | -10 to 10 (42 points) | Multifractal moment orders |
-| MFDFA order | 2 | Quadratic detrending |
-| Lag range | 10 to 3162 | Logarithmically spaced scales |
+- **Smoothing window**: 25ms
+- **Target sample rate**: 150 Hz
+- **Q-values**: -10 to 10 (42 points)
+- **MFDFA order**: 2 (quadratic detrending)
+- **Lag range**: 10 to 3162 (logarithmically spaced)
+- **Spectrum calculation**: Legendre transform
 
-## 📈 Results
+## 📊 Results
 
-### DFA Output Format
+### Output Directories
+
+Analysis scripts create timestamped output directories:
+
+- **DFA**: `results/amplitude_envelope/dfa/smooth_ms_25_downsample_150_hz_YYYYMMDD_HHMMSS/`
+- **MFDFA**: `results/amplitude_envelope/mfdfa/smooth_ms_25_downsample_150_hz_q-10_10_42_YYYYMMDD_HHMMSS/`
+
+### DFA Results Format
 
 Each CSV contains:
 - `year`, `position`, `artist`, `title` - Song metadata
@@ -171,7 +212,7 @@ Each CSV contains:
 - `r_squared` - Goodness of fit
 - `log_n`, `log_fn` - DFA fluctuation data (JSON format)
 
-### MFDFA Output Format
+### MFDFA Results Format
 
 Each CSV contains:
 - `year`, `position`, `artist`, `title` - Song metadata
@@ -181,22 +222,25 @@ Each CSV contains:
 - `truncation` - Spectrum truncation type
 - `alpha`, `f_alpha`, `H_q` - Full spectra (JSON format)
 
-### Key Metrics Explained
-
-- **α (Alpha)**: Scaling exponent indicating persistence (α > 1) or anti-persistence (α < 1)
-- **α-width**: Range of scaling exponents, indicating multifractal complexity
-- **Spectrum Skew**: Asymmetry of the multifractal spectrum
-- **Truncation**: Indicates leveling of scaling behavior at extreme q-values
-
-## 🔗 Data Access
-
-### Audio Files
-Due to copyright restrictions, Billboard audio files are not included. AI-generated audio samples are available on Zenodo (link to be added).
-
 ### Reference Data
+
 Pre-computed results are available in `reference_data/` for:
-- DFA results: Alpha values, intercepts, and fit statistics
-- MFDFA results: Alpha width, alpha peak, spectrum skew, and H(q) values
+- **DFA results**: Alpha values, intercepts, and fit statistics
+- **MFDFA results**: Alpha width, alpha peak, spectrum skew, and H(q) values
+
+## 🎵 Web Interface
+
+The project includes a web interface for exploring results:
+
+- **Main site**: [https://zhangkkevin.github.io/billboard-ai-fractal-comparison/](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)
+- **Local development**: Serve `docs/` directory with any web server
+
+### Features
+- Interactive audio samples from analysis results
+- Spotify embeds for Billboard songs
+- Local audio files for AI-generated music
+- Detailed analysis visualizations
+- Responsive design for all devices
 
 ## 📚 Citation
 
@@ -214,6 +258,10 @@ If you use this code in your research, please cite:
 
 ## 🤝 Contributing
 
+We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+### Development Setup
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
@@ -226,8 +274,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Audio processing libraries: `pydub`, `librosa`
-- Fractal analysis: `nolds`, `MFDFA`
-- Scientific computing: `numpy`, `scipy`, `pandas`
-- Visualization: `matplotlib`, `seaborn`
+- **Audio Processing**: FFmpeg, librosa, pydub
+- **Fractal Analysis**: nolds, MFDFA
+- **Data Analysis**: pandas, scipy, numpy
+- **Visualization**: matplotlib, seaborn
+- **Web Interface**: HTML5, CSS3, JavaScript
+
+## 📞 Contact
+
+- **Author**: Kevin Kailun Zhang
+- **Email**: [Your email]
+- **GitHub**: [@zhangkkevin](https://github.com/zhangkkevin)
+
+---
+
+**Note**: This research is part of ongoing work on understanding the fractal properties of music and comparing human-created vs AI-generated compositions.
 
