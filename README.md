@@ -23,8 +23,7 @@ This repository contains code and data for performing fractal analysis (DFA and 
 - [Analysis Parameters](#analysis-parameters)
 - [Results](#results)
 - [Citation](#citation)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contact](#contact)
 
 ## 🎯 Overview
 
@@ -222,20 +221,6 @@ Each CSV contains:
 Pre-computed results are available in `reference_data/` for:
 - **DFA results**: Alpha values, intercepts, and fit statistics
 - **MFDFA results**: Alpha width, alpha peak, spectrum skew, and H(q) values
-
-## 🎵 Web Interface
-
-The project includes a web interface for exploring results:
-
-- **Main site**: [https://zhangkkevin.github.io/billboard-ai-fractal-comparison/](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)
-- **Local development**: Serve `docs/` directory with any web server
-
-### Features
-- Interactive audio samples from analysis results
-- Spotify embeds for Billboard songs
-- Local audio files for AI-generated music
-- Detailed analysis visualizations
-- Responsive design for all devices
 
 ## 📚 Citation
 
