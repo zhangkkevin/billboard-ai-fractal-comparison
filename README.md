@@ -38,9 +38,9 @@ This project analyzes the fractal properties of music amplitude envelopes using 
 The analysis compares:
 - **Billboard Top 5 songs** (1950-2024) - Human-created music
 - **AI-generated music** from multiple models:
-  - **Suno v4.5** - Latest AI music generation model
-  - **DiffRhythm** - Diffusion-based music generation
-  - **YuE** - Neural music synthesis model
+  - **[Suno v4.5](https://suno.com/)** - Latest AI music generation model
+  - **[DiffRhythm](https://github.com/ASLP-lab/DiffRhythm)** - Diffusion-based music generation
+  - **[YuE](https://github.com/multimodal-art-projection/YuE)** - Neural music synthesis model
 
 ## 🚀 Quick Start
 
@@ -251,37 +251,11 @@ If you use this code in your research, please cite:
 }
 ```
 
-## 🤝 Contributing
-
-We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### Development Setup
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Audio Processing**: FFmpeg, librosa, pydub
-- **Fractal Analysis**: nolds, MFDFA
-- **Data Analysis**: pandas, scipy, numpy
-- **Visualization**: matplotlib, seaborn
-- **Web Interface**: HTML5, CSS3, JavaScript
-
 ## 📞 Contact
 
 - **Author**: Kevin Kailun Zhang
-- **Email**: [Your email]
-- **GitHub**: [@zhangkkevin](https://github.com/zhangkkevin)
+- **Email**: kkzhang825@connect.hkust-gz.edu.cn
 
 ---
 
 **Note**: This research is part of ongoing work on understanding the fractal properties of music and comparing human-created vs AI-generated compositions.
-
