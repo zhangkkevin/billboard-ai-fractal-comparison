@@ -263,7 +263,7 @@ function populateSection(sectionId, songs) {
 async function loadAudioMetadata() {
     try {
         console.log('Loading audio metadata...');
-        const response = await fetch('audio_metadata.json?v=6');
+        const response = await fetch('audio_metadata.json?v=7');
         console.log('Metadata response status:', response.status);
         if (response.ok) {
             const metadata = await response.json();
@@ -280,26 +280,42 @@ async function loadAudioMetadata() {
     }
 }
 
+// Function to check if running locally
+function isLocalhost() {
+    return window.location.hostname === 'localhost' || 
+           window.location.hostname === '127.0.0.1' || 
+           window.location.hostname === '';
+}
+
 // Initialize the page when DOM is loaded
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM loaded, starting initialization...');
     
+    // Show debug links only on localhost
+    const debugLinks = document.getElementById('debug-links');
+    if (debugLinks && isLocalhost()) {
+        debugLinks.style.display = 'block';
+        console.log('Debug links enabled for localhost');
+    }
+    
     // Load audio metadata first
     await loadAudioMetadata();
     
-    // Test audio file accessibility
-    console.log('Testing audio file accessibility...');
-    const testFiles = [
-        'audio/suno_v4_5_2023_4_Taylor_Swift_Anti-Hero.mp3',
-        'audio/YuE_1957_1_Elvis_Presley_All_Shook_Up.mp3'
-    ];
-    
-    for (const file of testFiles) {
-        try {
-            const response = await fetch(file, { method: 'HEAD' });
-            console.log(`${file}: ${response.ok ? '✅ Accessible' : '❌ Not accessible'} (${response.status})`);
-        } catch (error) {
-            console.error(`${file}: ❌ Error - ${error.message}`);
+    // Test audio file accessibility (only on localhost)
+    if (isLocalhost()) {
+        console.log('Testing audio file accessibility...');
+        const testFiles = [
+            'audio/suno_v4_5_2023_4_Taylor_Swift_Anti-Hero.mp3',
+            'audio/YuE_1957_1_Elvis_Presley_All_Shook_Up.mp3'
+        ];
+        
+        for (const file of testFiles) {
+            try {
+                const response = await fetch(file, { method: 'HEAD' });
+                console.log(`${file}: ${response.ok ? '✅ Accessible' : '❌ Not accessible'} (${response.status})`);
+            } catch (error) {
+                console.error(`${file}: ❌ Error - ${error.message}`);
+            }
         }
     }
     
