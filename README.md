@@ -138,10 +138,10 @@ Before running analysis, configure your audio data paths in the analysis scripts
 
 ```python
 AUDIO_ROOTS = {
-    "billboard": "path/to/billboard/audio",
-    "suno_v4_5": "path/to/suno/audio", 
-    "diffrhythm": "path/to/diffrhythm/audio",
-    "yue": "path/to/yue/audio"
+    "billboard": "path/to/audio_data/billboard/audio_files",
+    "suno_v4_5": "path/to/audio_data/suno_v4_5/audio_files", 
+    "diffrhythm": "path/to/audio_data/diffrhythm/audio_files",
+    "yue": "path/to/audio_data/yue/audio_files"
 }
 ```
 
@@ -152,13 +152,13 @@ AUDIO_ROOTS = {
 ```
 audio_data/
 ├── billboard/
-│   └── non_separated/
-│       └── full_duration/
+│   └── audio_files/
 ├── suno_v4_5/
-│   └── non_separated/
+│   └── audio_files/
 ├── diffrhythm/
+│   └── audio_files/
 └── yue/
-    └── non_separated/
+    └── audio_files/
 ```
 
 ### File Naming Convention
