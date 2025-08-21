@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Working Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .working { background: #d4edda; }
+        .not-working { background: #f8d7da; }
+        .status { font-weight: bold; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>YouTube Video Working Test</h1>
+    <p>Testing all YouTube video IDs from the website to see which ones work:</p>
+    
+    <div id="results"></div>
+    
+    <script>
+        const youtubeVideoIds = {
+            "Bad Day - Daniel Powter": "eN_SVw-yyhA",
+            "Let Me Love You - Mario": "mbG5fhlMdrI",
+            "Rockstar - DaBaby feat. Roddy Ricch": "83xBPCw5hh4",
+            "Sugar - Maroon 5": "N1BcpzPGlYQ",
+            "Dark Horse - Katy Perry and Juicy J": "ONb4aTtG6Ps",
+            "Auf Wiederseh'n Sweetheart - Vera Lynn": "36prRdWCqu0",
+            "Low - Flo Rida feat. T-Pain": "CxPc1Q3-0zc"
+        };
+        
+        function createTestDiv(songTitle, videoId) {
+            const div = document.createElement('div');
+            div.className = 'test';
+            div.id = `test-${videoId}`;
+            
+            div.innerHTML = `
+                <h3>${songTitle}</h3>
+                <p><strong>Video ID:</strong> ${videoId}</p>
+                <div class="status" id="status-${videoId}">Testing...</div>
+                <iframe 
+                    width="300" 
+                    height="166" 
+                    src="https://www.youtube.com/embed/${videoId}" 
+                    title="${songTitle}"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    onload="markWorking('${videoId}')"
+                    onerror="markNotWorking('${videoId}')">
+                </iframe>
+            `;
+            
+            return div;
+        }
+        
+        function markWorking(videoId) {
+            const statusDiv = document.getElementById(`status-${videoId}`);
+            const testDiv = document.getElementById(`test-${videoId}`);
+            if (statusDiv && testDiv) {
+                statusDiv.innerHTML = '✅ Working';
+                statusDiv.style.color = 'green';
+                testDiv.className = 'test working';
+            }
+        }
+        
+        function markNotWorking(videoId) {
+            const statusDiv = document.getElementById(`status-${videoId}`);
+            const testDiv = document.getElementById(`test-${videoId}`);
+            if (statusDiv && testDiv) {
+                statusDiv.innerHTML = '❌ Not Working';
+                statusDiv.style.color = 'red';
+                testDiv.className = 'test not-working';
+            }
+        }
+        
+        // Create test divs for all videos
+        const resultsDiv = document.getElementById('results');
+        for (const [songTitle, videoId] of Object.entries(youtubeVideoIds)) {
+            const testDiv = createTestDiv(songTitle, videoId);
+            resultsDiv.appendChild(testDiv);
+        }
+        
+        // Set a timeout to mark videos as not working if they don't load
+        setTimeout(() => {
+            for (const videoId of Object.values(youtubeVideoIds)) {
+                const statusDiv = document.getElementById(`status-${videoId}`);
+                if (statusDiv && statusDiv.innerHTML === 'Testing...') {
+                    markNotWorking(videoId);
+                }
+            }
+        }, 10000); // 10 second timeout
+    </script>
+</body>
+</html>

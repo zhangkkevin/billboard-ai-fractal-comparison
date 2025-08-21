@@ -105,9 +105,13 @@ function getAudioPlayer(song) {
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen
-                        onload="console.log('YouTube iframe loaded: ${song.title}')"
-                        onerror="console.error('YouTube iframe error: ${song.title}')">
+                        onload="console.log('YouTube iframe loaded successfully: ${song.title}')"
+                        onerror="console.error('YouTube iframe failed to load: ${song.title}')"
+                        onabort="console.error('YouTube iframe aborted: ${song.title}')">
                     </iframe>
+                    <div class="youtube-info">
+                        <small>YouTube: ${song.title} by ${song.artist}</small>
+                    </div>
                 </div>
             `;
         } else {
@@ -170,10 +174,19 @@ function getYouTubeEmbed(song) {
     const songKey = `${song.title} - ${song.artist}`;
     const videoId = youtubeVideoIds[songKey];
     
+    console.log('YouTube lookup:', {
+        songKey: songKey,
+        videoId: videoId,
+        found: !!videoId
+    });
+    
     if (videoId) {
-        return `https://www.youtube.com/embed/${videoId}`;
+        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        console.log('YouTube embed URL:', embedUrl);
+        return embedUrl;
     }
     
+    console.log('No YouTube video found for:', songKey);
     return null;
 }
 
@@ -263,7 +276,7 @@ function populateSection(sectionId, songs) {
 async function loadAudioMetadata() {
     try {
         console.log('Loading audio metadata...');
-        const response = await fetch('audio_metadata.json?v=7');
+        const response = await fetch('audio_metadata.json?v=8');
         console.log('Metadata response status:', response.status);
         if (response.ok) {
             const metadata = await response.json();

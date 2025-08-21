@@ -185,6 +185,13 @@ main {
     font-size: 0.8rem;
 }
 
+.youtube-info {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: #718096;
+    font-size: 0.8rem;
+}
+
 .nav {
     margin-top: 1rem;
 }
