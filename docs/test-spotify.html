@@ -7,25 +7,24 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
-        .working { background: #d4edda; }
-        .not-working { background: #f8d7da; }
-        .status { font-weight: bold; margin: 5px 0; }
+        .success { background: #d4edda; }
+        .error { background: #f8d7da; }
     </style>
 </head>
 <body>
     <h1>Spotify Embed Test</h1>
-    <p>Testing Spotify embeds for Billboard songs:</p>
+    <p>Testing all Spotify track IDs from the website to see which ones work:</p>
     
     <div id="results"></div>
     
     <script>
         const spotifyTrackIds = {
             "Bad Day - Daniel Powter": "0mUyMawtxj1CJ76kn9gIZK",
-            "Let Me Love You - Mario": "3bNx3S9e3VR3EKtE4HZdnf",
-            "Rockstar - DaBaby feat. Roddy Ricch": "17jTxlFxv1n5rc7uVJotLi",
-            "Sugar - Maroon 5": "2iuZJX9X9P0GKaE3cim7qU",
-            "Dark Horse - Katy Perry and Juicy J": "6jJ1R9cktKcMky9elKwZ0x",
-            "Auf Wiederseh'n Sweetheart - Vera Lynn": "2QwMObGLHr5K7k6OZWiS5K",
+            "Let Me Love You - Mario": "7EXstuWka51pNFzEAidEol",
+            "Rockstar - DaBaby feat. Roddy Ricch": "7ytR5pFWmSjzHJIeQkgog4",
+            "Sugar - Maroon 5": "5d6Mjuu2uCGRPYpFjGpCX5",
+            "Dark Horse - Katy Perry and Juicy J": "5jrdCoLpJSvHHorevXBATy",
+            "Auf Wiederseh'n Sweetheart - Vera Lynn": "3rIhZKroSQQjNcgGQsdaJF",
             "Low - Flo Rida feat. T-Pain": "0CAfXk7DXMnon4gLudAp7J"
         };
         
@@ -61,7 +60,7 @@
             if (statusDiv && testDiv) {
                 statusDiv.innerHTML = '✅ Working';
                 statusDiv.style.color = 'green';
-                testDiv.className = 'test working';
+                testDiv.className = 'test success';
             }
         }
         
@@ -71,7 +70,7 @@
             if (statusDiv && testDiv) {
                 statusDiv.innerHTML = '❌ Not Working';
                 statusDiv.style.color = 'red';
-                testDiv.className = 'test not-working';
+                testDiv.className = 'test error';
             }
         }
         

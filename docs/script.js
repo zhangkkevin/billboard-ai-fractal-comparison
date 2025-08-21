@@ -110,9 +110,6 @@ function getAudioPlayer(song) {
                         onerror="handleSpotifyError('${song.title}', '${song.artist}')"
                         onabort="handleSpotifyError('${song.title}', '${song.artist}')">
                     </iframe>
-                    <div class="spotify-info">
-                        <small>Spotify: ${song.title} by ${song.artist}</small>
-                    </div>
                 </div>
             `;
         } else {
@@ -152,19 +149,19 @@ const spotifyTrackIds = {
     "Bad Day - Daniel Powter": "0mUyMawtxj1CJ76kn9gIZK",
     
     // DFA Analysis - Min α
-    "Let Me Love You - Mario": "3bNx3S9e3VR3EKtE4HZdnf",
-    
+    "Let Me Love You - Mario": "7EXstuWka51pNFzEAidEol",
+
     // DFA Analysis - Max α
-    "Rockstar - DaBaby feat. Roddy Ricch": "17jTxlFxv1n5rc7uVJotLi",
+    "Rockstar - DaBaby feat. Roddy Ricch": "7ytR5pFWmSjzHJIeQkgog4",
     
     // MFDFA Analysis - Max Width
-    "Sugar - Maroon 5": "2iuZJX9X9P0GKaE3cim7qU",
+    "Sugar - Maroon 5": "5d6Mjuu2uCGRPYpFjGpCX5",
     
     // MFDFA Analysis - Min Width
-    "Dark Horse - Katy Perry and Juicy J": "6jJ1R9cktKcMky9elKwZ0x",
-    
+    "Dark Horse - Katy Perry and Juicy J": "5jrdCoLpJSvHHorevXBATy",
+
     // MFDFA Analysis - Max Skew
-    "Auf Wiederseh'n Sweetheart - Vera Lynn": "2QwMObGLHr5K7k6OZWiS5K",
+    "Auf Wiederseh'n Sweetheart - Vera Lynn": "3rIhZKroSQQjNcgGQsdaJF",
     
     // MFDFA Analysis - Min Skew
     "Low - Flo Rida feat. T-Pain": "0CAfXk7DXMnon4gLudAp7J"
