@@ -9,6 +9,8 @@ This repository contains code and data for performing fractal analysis (DFA and 
 **"Multifractal Comparison of Billboard and AI-Generated Music"**  
 *(Accepted to ACM Multimedia Brave New Ideas 2025)*
 
+📄 **[Read the Paper](https://doi.org/placeholder-link)**
+
 ## 🎵 [Live Demo: Audio Samples from Analysis Results](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)
 
 ## 📋 Table of Contents
@@ -45,6 +47,7 @@ The analysis compares:
 ### Prerequisites
 
 - Python 3.10+
+- Conda or pip package manager
 - FFmpeg (for audio processing)
 
 ### Installation
@@ -55,15 +58,46 @@ The analysis compares:
    cd billboard-ai-fractal-comparison
    ```
 
-2. **Install dependencies**
+2. **Create and activate conda environment**
+   ```bash
+   conda create -n fractal_analysis python=3.10
+   conda activate fractal_analysis
+   ```
+
+3. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Install FFmpeg** (if not already installed)
-   - **Ubuntu/Debian**: `sudo apt-get install ffmpeg`
-   - **macOS**: `brew install ffmpeg`
-   - **Windows**: Download from [ffmpeg.org](https://ffmpeg.org/download.html)
+## 📦 Installation
+
+### Option 1: Using requirements.txt (Recommended)
+
+```bash
+pip install -r requirements.txt
+```
+
+### Option 2: Manual installation
+
+```bash
+pip install numpy pandas scipy matplotlib seaborn nolds MFDFA tqdm pydub scikit-learn librosa tinytag
+```
+
+### System Dependencies
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update
+sudo apt-get install ffmpeg
+```
+
+**macOS:**
+```bash
+brew install ffmpeg
+```
+
+**Windows:**
+Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
 
 ## 🔧 Usage
 
