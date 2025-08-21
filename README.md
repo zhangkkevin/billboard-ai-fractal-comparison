@@ -40,19 +40,11 @@ The analysis compares:
   - **DiffRhythm** - Diffusion-based music generation
   - **YuE** - Neural music synthesis model
 
-### Key Findings
-
-- **DFA Analysis**: Identifies songs closest to α=1.0 (random walk), minimum α (anti-persistent), and maximum α (persistent)
-- **MFDFA Analysis**: Reveals maximum/minimum width and skew spectrum examples
-- **JSD Comparison**: Quantifies similarity between AI-generated and Billboard music patterns
-- **Copyright-compliant**: Uses YouTube embeds for original music, local files for AI-generated content
-
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 - Python 3.10+
-- Conda or pip package manager
 - FFmpeg (for audio processing)
 
 ### Installation
@@ -63,46 +55,15 @@ The analysis compares:
    cd billboard-ai-fractal-comparison
    ```
 
-2. **Create and activate conda environment**
-   ```bash
-   conda create -n fractal_analysis python=3.10
-   conda activate fractal_analysis
-   ```
-
-3. **Install dependencies**
+2. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-## 📦 Installation
-
-### Option 1: Using requirements.txt (Recommended)
-
-```bash
-pip install -r requirements.txt
-```
-
-### Option 2: Manual installation
-
-```bash
-pip install numpy pandas scipy matplotlib seaborn nolds MFDFA tqdm pydub scikit-learn librosa tinytag
-```
-
-### System Dependencies
-
-**Ubuntu/Debian:**
-```bash
-sudo apt-get update
-sudo apt-get install ffmpeg
-```
-
-**macOS:**
-```bash
-brew install ffmpeg
-```
-
-**Windows:**
-Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
+3. **Install FFmpeg** (if not already installed)
+   - **Ubuntu/Debian**: `sudo apt-get install ffmpeg`
+   - **macOS**: `brew install ffmpeg`
+   - **Windows**: Download from [ffmpeg.org](https://ffmpeg.org/download.html)
 
 ## 🔧 Usage
 
