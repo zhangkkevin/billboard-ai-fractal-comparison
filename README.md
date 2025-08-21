@@ -7,7 +7,7 @@
 This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music, as described in the paper:
 
 **"Multifractal Comparison of Billboard and AI-Generated Music"**  
-*(Submitted to ACM Multimedia Brave New Ideas 2025)*
+*(Accepted to ACM Multimedia Brave New Ideas 2025)*
 
 ## 🎵 [Live Demo: Audio Samples from Analysis Results](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)
 
