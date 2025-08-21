@@ -149,7 +149,7 @@ const spotifyTrackIds = {
     "Bad Day - Daniel Powter": "0mUyMawtxj1CJ76kn9gIZK",
     
     // DFA Analysis - Min α
-    "Let Me Love You - Mario": "7EXstuWka51pNFzEAidEol",
+    "Let Me Love You - Mario": "3ibKnFDaa3GhpPGlOUj7ff",
 
     // DFA Analysis - Max α
     "Rockstar - DaBaby feat. Roddy Ricch": "7ytR5pFWmSjzHJIeQkgog4",
@@ -274,7 +274,7 @@ function populateSection(sectionId, songs) {
 async function loadAudioMetadata() {
     try {
         console.log('Loading audio metadata...');
-        const response = await fetch('audio_metadata.json?v=10');
+        const response = await fetch('audio_metadata.json?v=11');
         console.log('Metadata response status:', response.status);
         if (response.ok) {
             const metadata = await response.json();
