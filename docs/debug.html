@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Debug - Billboard AI Fractal Comparison</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .debug-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .debug-log {
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .test-audio {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Audio Debug Page</h1>
+            <p>Testing audio file loading and YouTube video embedding</p>
+        </header>
+
+        <main>
+            <div class="debug-section">
+                <h2>Audio File Tests</h2>
+                <div id="audio-tests"></div>
+            </div>
+
+            <div class="debug-section">
+                <h2>YouTube Video Tests</h2>
+                <div id="youtube-tests"></div>
+            </div>
+
+            <div class="debug-section">
+                <h2>Debug Log</h2>
+                <div id="debug-log" class="debug-log"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('debug-log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+
+        // Test audio files
+        async function testAudioFiles() {
+            const audioFiles = [
+                'suno_v4_5_2023_4_Taylor_Swift_Anti-Hero.mp3',
+                'YuE_1957_1_Elvis_Presley_All_Shook_Up.mp3',
+                'diffrhythm_1958_2b_The_Everly_Brothers_Claudette.mp3'
+            ];
+
+            const testsDiv = document.getElementById('audio-tests');
+            
+            for (const file of audioFiles) {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-audio';
+                testDiv.innerHTML = `
+                    <h3>Testing: ${file}</h3>
+                    <audio controls preload="metadata" onloadstart="log('Loading: ${file}')" onerror="log('Error loading: ${file}')" oncanplay="log('Success: ${file}')">
+                        <source src="audio/${file}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                `;
+                testsDiv.appendChild(testDiv);
+            }
+        }
+
+        // Test YouTube videos
+        function testYouTubeVideos() {
+            const videos = [
+                { id: 'eN_SVw-yyhA', title: 'Bad Day - Daniel Powter' },
+                { id: 'b1kbLWf8aQY', title: 'Anti-Hero - Taylor Swift' },
+                { id: '8UFIYGkROII', title: 'Harlem Shake - Baauer' }
+            ];
+
+            const testsDiv = document.getElementById('youtube-tests');
+            
+            for (const video of videos) {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-audio';
+                testDiv.innerHTML = `
+                    <h3>Testing: ${video.title}</h3>
+                    <iframe 
+                        width="300" 
+                        height="166" 
+                        src="https://www.youtube.com/embed/${video.id}" 
+                        title="${video.title}"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        onload="log('YouTube loaded: ${video.title}')"
+                        onerror="log('YouTube error: ${video.title}')">
+                    </iframe>
+                `;
+                testsDiv.appendChild(testDiv);
+            }
+        }
+
+        // Initialize tests
+        document.addEventListener('DOMContentLoaded', function() {
+            log('Debug page loaded');
+            testAudioFiles();
+            testYouTubeVideos();
+        });
+    </script>
+</body>
+</html>

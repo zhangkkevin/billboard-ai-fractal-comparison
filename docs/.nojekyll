@@ -1,2 +1,6 @@
-# This file tells GitHub Pages not to use Jekyll processing
-# It's needed for static sites with custom JavaScript
+# GitHub Pages configuration
+# This file tells GitHub Pages not to process this directory with Jekyll
+
+# Add CORS headers for audio files
+# Note: GitHub Pages doesn't support custom headers, but this helps with some browsers
+

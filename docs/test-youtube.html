@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background: #d4edda; }
+        .error { background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>YouTube Video Test</h1>
+    
+    <div class="test">
+        <h3>Test 1: Bad Day - Daniel Powter</h3>
+        <iframe 
+            width="300" 
+            height="166" 
+            src="https://www.youtube.com/embed/eN_SVw-yyhA" 
+            title="Bad Day - Daniel Powter"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="test">
+        <h3>Test 2: Let Me Love You - Mario</h3>
+        <iframe 
+            width="300" 
+            height="166" 
+            src="https://www.youtube.com/embed/mbG5fhlMdrI" 
+            title="Let Me Love You - Mario"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="test">
+        <h3>Test 3: Rockstar - DaBaby feat. Roddy Ricch</h3>
+        <iframe 
+            width="300" 
+            height="166" 
+            src="https://www.youtube.com/embed/83xBPCw5hh4" 
+            title="Rockstar - DaBaby feat. Roddy Ricch"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="test">
+        <h3>Test 4: Sugar - Maroon 5</h3>
+        <iframe 
+            width="300" 
+            height="166" 
+            src="https://www.youtube.com/embed/N1BcpzPGlYQ" 
+            title="Sugar - Maroon 5"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="test">
+        <h3>Test 5: Dark Horse - Katy Perry and Juicy J</h3>
+        <iframe 
+            width="300" 
+            height="166" 
+            src="https://www.youtube.com/embed/ONb4aTtG6Ps" 
+            title="Dark Horse - Katy Perry and Juicy J"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="test">
+        <h3>Test 6: Low - Flo Rida feat. T-Pain</h3>
+        <iframe 
+            width="300" 
+            height="166" 
+            src="https://www.youtube.com/embed/CxPc1Q3-0zc" 
+            title="Low - Flo Rida feat. T-Pain"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <script>
+        // Add error handling for iframes
+        document.querySelectorAll('iframe').forEach(iframe => {
+            iframe.addEventListener('load', function() {
+                console.log('YouTube iframe loaded successfully:', this.title);
+            });
+            
+            iframe.addEventListener('error', function() {
+                console.error('YouTube iframe failed to load:', this.title);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata Matching Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background: #d4edda; }
+        .error { background: #f8d7da; }
+        .debug { background: #fff3cd; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Metadata Matching Debug</h1>
+    
+    <div id="results"></div>
+    
+    <script>
+        // Copy the findAudioFile function from script.js
+        function findAudioFile(song, audioMetadata) {
+            console.log('Looking for song:', song.title, 'by', song.artist, 'model:', song.model, 'year:', song.year);
+            
+            // Search for matching file based on song info
+            for (const [fileId, metadata] of Object.entries(audioMetadata.files || {})) {
+                // Parse the song field to extract title and artist
+                const songParts = metadata.song.split(' - ');
+                const metadataTitle = songParts[0] ? songParts[0].replace(/_/g, ' ').replace(/s_Theme/g, "'s Theme").replace(/Loves_Theme/g, "Love's Theme") : '';
+                const metadataArtist = songParts[1] ? songParts[1].replace(/_/g, ' ') : '';
+                
+                // Normalize titles for comparison (remove apostrophes, extra spaces, etc.)
+                const normalizedMetadataTitle = metadataTitle.toLowerCase().replace(/['']/g, '').replace(/\s+/g, ' ').trim();
+                const normalizedSongTitle = song.title.toLowerCase().replace(/['']/g, '').replace(/\s+/g, ' ').trim();
+                const normalizedMetadataArtist = metadataArtist.toLowerCase().replace(/\s+/g, ' ').trim();
+                const normalizedSongArtist = song.artist.toLowerCase().replace(/\s+/g, ' ').trim();
+                
+                const modelMatch = metadata.model.toLowerCase() === song.model.toLowerCase();
+                const titleMatch = normalizedMetadataTitle === normalizedSongTitle;
+                const artistMatch = normalizedMetadataArtist === normalizedSongArtist;
+                const yearMatch = metadata.year === song.year;
+                
+                console.log('Comparing with metadata:', {
+                    metadataTitle: metadataTitle,
+                    metadataArtist: metadataArtist,
+                    modelMatch,
+                    titleMatch,
+                    artistMatch,
+                    yearMatch
+                });
+                
+                if (modelMatch && titleMatch && artistMatch && yearMatch) {
+                    console.log('Found matching audio file:', metadata.file);
+                    return metadata.file;
+                }
+            }
+            
+            console.log('No matching audio file found in metadata for:', song.title, 'by', song.artist);
+            
+            // Fallback: try to construct filename that matches actual file pattern
+            const safeTitle = song.title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+            const safeArtist = song.artist.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+            const modelPrefix = song.model; // Keep original case (YuE, suno_v4_5, diffrhythm)
+            
+            // Handle special cases for rank
+            const rank = song.rank || 'undefined';
+            
+            const possibleFilename = `${modelPrefix}_${song.year}_${rank}_${safeArtist}_${safeTitle}.mp3`;
+            
+            console.log('Generated fallback filename:', possibleFilename);
+            return possibleFilename;
+        }
+
+        async function runTests() {
+            const resultsDiv = document.getElementById('results');
+            
+            // Load metadata
+            const response = await fetch('audio_metadata.json');
+            const audioMetadata = await response.json();
+            
+            // Test cases from the song data
+            const testCases = [
+                {
+                    title: "Blue Tango",
+                    artist: "Leroy Anderson", 
+                    year: 1952,
+                    rank: 1,
+                    model: "YuE"
+                },
+                {
+                    title: "Anti-Hero",
+                    artist: "Taylor Swift",
+                    year: 2023,
+                    rank: 4,
+                    model: "suno_v4_5"
+                },
+                {
+                    title: "Love's Theme",
+                    artist: "Love Unlimited Orchestra",
+                    year: 1974,
+                    rank: 3,
+                    model: "suno_v4_5"
+                }
+            ];
+            
+            for (const testCase of testCases) {
+                const div = document.createElement('div');
+                div.className = 'test debug';
+                
+                console.log('=== Testing:', testCase.title, 'by', testCase.artist, '===');
+                const result = findAudioFile(testCase, audioMetadata);
+                
+                div.innerHTML = `
+                    <h3>Test: ${testCase.title} by ${testCase.artist}</h3>
+                    <p><strong>Model:</strong> ${testCase.model}</p>
+                    <p><strong>Year:</strong> ${testCase.year}</p>
+                    <p><strong>Rank:</strong> ${testCase.rank}</p>
+                    <p><strong>Result:</strong> ${result}</p>
+                    <p><strong>Status:</strong> ${result ? '✅ Found' : '❌ Not found'}</p>
+                `;
+                
+                resultsDiv.appendChild(div);
+            }
+            
+            // Show all metadata entries
+            const metadataDiv = document.createElement('div');
+            metadataDiv.className = 'test';
+            metadataDiv.innerHTML = `
+                <h3>All Metadata Entries</h3>
+                <pre>${JSON.stringify(audioMetadata.files, null, 2)}</pre>
+            `;
+            resultsDiv.appendChild(metadataDiv);
+        }
+        
+        runTests();
+    </script>
+</body>
+</html>

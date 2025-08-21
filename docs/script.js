@@ -104,7 +104,9 @@ function getAudioPlayer(song) {
                         title="${song.title} by ${song.artist}"
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
+                        allowfullscreen
+                        onload="console.log('YouTube iframe loaded: ${song.title}')"
+                        onerror="console.error('YouTube iframe error: ${song.title}')">
                     </iframe>
                 </div>
             `;
@@ -124,7 +126,7 @@ function getAudioPlayer(song) {
     console.log('Audio file found:', audioFile);
     if (audioFile) {
         return `
-            <audio controls preload="metadata" style="width: 100%;">
+            <audio controls preload="metadata" style="width: 100%;" onerror="console.error('Audio loading error for:', '${audioFile}')" onloadstart="console.log('Loading audio:', '${audioFile}')">
                 <source src="audio/${audioFile}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -143,55 +145,24 @@ function getAudioPlayer(song) {
 const youtubeVideoIds = {
     // DFA Analysis - Closest to α=1.0
     "Bad Day - Daniel Powter": "eN_SVw-yyhA",
-    "Anti-Hero - Taylor Swift": "b1kbLWf8aQY", 
-    "Claudette - The Everly Brothers": "8qHhVJtQj-s",
-    "All Shook Up - Elvis Presley": "lzXgnX8aXzI",
     
     // DFA Analysis - Min α
     "Let Me Love You - Mario": "mbG5fhlMdrI",
-    "Love's Theme - Love Unlimited Orchestra": "8bfyS-S-TcA", // Placeholder
-    "Hanging By A Moment - Lifehouse": "t4QK8RxCAwo",
-    "Harlem Shake - Baauer": "8UFIYGkROII",
-    
+
     // DFA Analysis - Max α
     "Rockstar - DaBaby feat. Roddy Ricch": "83xBPCw5hh4",
-    "You're Beautiful - James Blunt": "oofSnsGkops",
-    "Mona Lisa - Nat King Cole": "8bfyS-S-TcA", // Placeholder
-    "Blue Tango - Leroy Anderson": "8bfyS-S-TcA", // Placeholder
     
     // MFDFA Analysis - Max Width
     "Sugar - Maroon 5": "N1BcpzPGlYQ",
-    "The Yellow Rose of Texas - Mitch Miller": "8bfyS-S-TcA", // Placeholder
-    "When I'm Gone - 3 Doors Down": "kXYiU_JCYtU",
-    "The Sweet Escape - Gwen Stefani feat. Akon": "OJB8ZjGJ8YI",
     
     // MFDFA Analysis - Min Width
     "Dark Horse - Katy Perry and Juicy J": "ONb4aTtG6Ps",
-    "Hot in Herre - Nelly": "GeZZr_p6vB8",
-    "Auf Wiederseh'n Sweetheart - Vera Lynn": "8bfyS-S-TcA", // Placeholder
-    "rockstar - Post Malone feat. 21 Savage": "UceaB4D0jpo",
-    
+
     // MFDFA Analysis - Max Skew
-    "Auf Wiederseh'n Sweetheart - Vera Lynn": "36prRdWCqu0", // Placeholder
-    "Good 4 U - Olivia Rodrigo": "gNi_6U5Pm_o",
-    "Poker Face - Lady Gaga": "bESGLojNYSo",
-    "Honey - Bobby Goldsboro": "8bfyS-S-TcA", // Placeholder
+    "Auf Wiederseh'n Sweetheart - Vera Lynn": "36prRdWCqu0",
     
     // MFDFA Analysis - Min Skew
-    "Low - Flo Rida feat. T-Pain": "CxPc1Q3-0zc",
-    "Hips Don't Lie - Shakira feat. Wyclef Jean": "DUT5rEU6pqM",
-    "Without Me - Halsey": "Y7dpJ0oseIA",
-    "Blue Tango - Leroy Anderson": "8bfyS-S-TcA", // Placeholder
-    
-    // JSD Analysis - Best
-    "End of the Road - Boyz II Men": "zDKO6XYXioc",
-    "Bad Guy - Billie Eilish": "DdyweUxXgFY",
-    "Uptown Funk - Mark Ronson feat. Bruno Mars": "OPf0YbXqDm0",
-    
-    // JSD Analysis - Worst
-    "Hot in Herre - Nelly": "GeZZr_p6vB8",
-    "Hanging By A Moment - Lifehouse": "t4QK8RxCAwo",
-    "Straight Up - Paula Abdul": "kXYiU_JCYtU" // Placeholder
+    "Low - Flo Rida feat. T-Pain": "CxPc1Q3-0zc"
 };
 
 // Function to get YouTube embed URL for a song
@@ -211,29 +182,69 @@ function findAudioFile(song) {
     // Load audio metadata if available
     const audioMetadata = window.audioMetadata || {};
     
+    console.log('Looking for song:', song.title, 'by', song.artist, 'model:', song.model, 'year:', song.year);
+    
     // Search for matching file based on song info
     for (const [fileId, metadata] of Object.entries(audioMetadata.files || {})) {
         // Parse the song field to extract title and artist
         const songParts = metadata.song.split(' - ');
-        const metadataTitle = songParts[0] ? songParts[0].replace(/_/g, ' ') : '';
+        const metadataTitle = songParts[0] ? songParts[0].replace(/_/g, ' ').replace(/s_Theme/g, "'s Theme").replace(/Loves_Theme/g, "Love's Theme") : '';
         const metadataArtist = songParts[1] ? songParts[1].replace(/_/g, ' ') : '';
         
-        if (metadata.model.toLowerCase() === song.model.toLowerCase() &&
-            metadataTitle.toLowerCase() === song.title.toLowerCase() &&
-            metadataArtist.toLowerCase() === song.artist.toLowerCase() &&
-            metadata.year === song.year) {
+        // Normalize titles for comparison (remove apostrophes, extra spaces, etc.)
+        const normalizedMetadataTitle = metadataTitle.toLowerCase().replace(/['']/g, '').replace(/\s+/g, ' ').trim();
+        const normalizedSongTitle = song.title.toLowerCase().replace(/['']/g, '').replace(/\s+/g, ' ').trim();
+        const normalizedMetadataArtist = metadataArtist.toLowerCase().replace(/\s+/g, ' ').trim();
+        const normalizedSongArtist = song.artist.toLowerCase().replace(/\s+/g, ' ').trim();
+        
+        const modelMatch = metadata.model.toLowerCase() === song.model.toLowerCase();
+        const titleMatch = normalizedMetadataTitle === normalizedSongTitle;
+        const artistMatch = normalizedMetadataArtist === normalizedSongArtist;
+        const yearMatch = metadata.year === song.year;
+        
+        console.log('Comparing with metadata:', {
+            metadataTitle: metadataTitle,
+            metadataArtist: metadataArtist,
+            modelMatch,
+            titleMatch,
+            artistMatch,
+            yearMatch
+        });
+        
+        if (modelMatch && titleMatch && artistMatch && yearMatch) {
+            console.log('Found matching audio file:', metadata.file);
             return metadata.file;
         }
     }
     
-    // Fallback: try to construct filename
+    console.log('No matching audio file found in metadata for:', song.title, 'by', song.artist);
+    
+    // Fallback: try to construct filename that matches actual file pattern
     const safeTitle = song.title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
     const safeArtist = song.artist.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
-    const modelPrefix = song.model.toLowerCase();
     
-    const possibleFilename = `${modelPrefix}_${song.year}_${song.rank}_${safeArtist}_${safeTitle}.mp3`;
+    // Preserve original case for model names
+    let modelPrefix;
+    switch(song.model.toLowerCase()) {
+        case 'yue':
+            modelPrefix = 'YuE';
+            break;
+        case 'suno_v4_5':
+            modelPrefix = 'suno_v4_5';
+            break;
+        case 'diffrhythm':
+            modelPrefix = 'diffrhythm';
+            break;
+        default:
+            modelPrefix = song.model;
+    }
     
-    // Check if file exists (this would require server-side checking in real implementation)
+    // Handle special cases for rank
+    const rank = song.rank || 'undefined';
+    
+    const possibleFilename = `${modelPrefix}_${song.year}_${rank}_${safeArtist}_${safeTitle}.mp3`;
+    
+    console.log('Generated fallback filename:', possibleFilename);
     return possibleFilename;
 }
 
@@ -252,7 +263,7 @@ function populateSection(sectionId, songs) {
 async function loadAudioMetadata() {
     try {
         console.log('Loading audio metadata...');
-        const response = await fetch('audio_metadata.json?v=5');
+        const response = await fetch('audio_metadata.json?v=6');
         console.log('Metadata response status:', response.status);
         if (response.ok) {
             const metadata = await response.json();
@@ -271,8 +282,26 @@ async function loadAudioMetadata() {
 
 // Initialize the page when DOM is loaded
 document.addEventListener('DOMContentLoaded', async function() {
+    console.log('DOM loaded, starting initialization...');
+    
     // Load audio metadata first
     await loadAudioMetadata();
+    
+    // Test audio file accessibility
+    console.log('Testing audio file accessibility...');
+    const testFiles = [
+        'audio/suno_v4_5_2023_4_Taylor_Swift_Anti-Hero.mp3',
+        'audio/YuE_1957_1_Elvis_Presley_All_Shook_Up.mp3'
+    ];
+    
+    for (const file of testFiles) {
+        try {
+            const response = await fetch(file, { method: 'HEAD' });
+            console.log(`${file}: ${response.ok ? '✅ Accessible' : '❌ Not accessible'} (${response.status})`);
+        } catch (error) {
+            console.error(`${file}: ❌ Error - ${error.message}`);
+        }
+    }
     
     // Populate DFA sections
     populateSection('dfa-closest', songData.dfa.closest);
