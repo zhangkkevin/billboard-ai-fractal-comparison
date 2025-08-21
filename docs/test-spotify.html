@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Embed Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .working { background: #d4edda; }
+        .not-working { background: #f8d7da; }
+        .status { font-weight: bold; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Spotify Embed Test</h1>
+    <p>Testing Spotify embeds for Billboard songs:</p>
+    
+    <div id="results"></div>
+    
+    <script>
+        const spotifyTrackIds = {
+            "Bad Day - Daniel Powter": "0mUyMawtxj1CJ76kn9gIZK",
+            "Let Me Love You - Mario": "3bNx3S9e3VR3EKtE4HZdnf",
+            "Rockstar - DaBaby feat. Roddy Ricch": "17jTxlFxv1n5rc7uVJotLi",
+            "Sugar - Maroon 5": "2iuZJX9X9P0GKaE3cim7qU",
+            "Dark Horse - Katy Perry and Juicy J": "6jJ1R9cktKcMky9elKwZ0x",
+            "Auf Wiederseh'n Sweetheart - Vera Lynn": "2QwMObGLHr5K7k6OZWiS5K",
+            "Low - Flo Rida feat. T-Pain": "0CAfXk7DXMnon4gLudAp7J"
+        };
+        
+        function createTestDiv(songTitle, trackId) {
+            const div = document.createElement('div');
+            div.className = 'test';
+            div.id = `test-${trackId}`;
+            
+            div.innerHTML = `
+                <h3>${songTitle}</h3>
+                <p><strong>Track ID:</strong> ${trackId}</p>
+                <div class="status" id="status-${trackId}">Testing...</div>
+                <iframe 
+                    style="border-radius:12px" 
+                    src="https://open.spotify.com/embed/track/${trackId}" 
+                    width="300" 
+                    height="152" 
+                    frameborder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy"
+                    onload="markWorking('${trackId}')"
+                    onerror="markNotWorking('${trackId}')">
+                </iframe>
+            `;
+            
+            return div;
+        }
+        
+        function markWorking(trackId) {
+            const statusDiv = document.getElementById(`status-${trackId}`);
+            const testDiv = document.getElementById(`test-${trackId}`);
+            if (statusDiv && testDiv) {
+                statusDiv.innerHTML = '✅ Working';
+                statusDiv.style.color = 'green';
+                testDiv.className = 'test working';
+            }
+        }
+        
+        function markNotWorking(trackId) {
+            const statusDiv = document.getElementById(`status-${trackId}`);
+            const testDiv = document.getElementById(`test-${trackId}`);
+            if (statusDiv && testDiv) {
+                statusDiv.innerHTML = '❌ Not Working';
+                statusDiv.style.color = 'red';
+                testDiv.className = 'test not-working';
+            }
+        }
+        
+        // Create test divs for all tracks
+        const resultsDiv = document.getElementById('results');
+        for (const [songTitle, trackId] of Object.entries(spotifyTrackIds)) {
+            const testDiv = createTestDiv(songTitle, trackId);
+            resultsDiv.appendChild(testDiv);
+        }
+        
+        // Set a timeout to mark tracks as not working if they don't load
+        setTimeout(() => {
+            for (const trackId of Object.values(spotifyTrackIds)) {
+                const statusDiv = document.getElementById(`status-${trackId}`);
+                if (statusDiv && statusDiv.innerHTML === 'Testing...') {
+                    markNotWorking(trackId);
+                }
+            }
+        }, 10000); // 10 second timeout
+    </script>
+</body>
+</html>

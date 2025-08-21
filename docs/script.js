@@ -90,35 +90,36 @@ function createSongItem(song) {
 function getAudioPlayer(song) {
     console.log('Getting audio player for song:', song.title, 'by', song.artist, 'model:', song.model);
     
-    // For Billboard music, use YouTube embeds
+    // For Billboard music, use Spotify embeds
     if (song.model.toLowerCase() === 'billboard') {
-        const youtubeEmbed = getYouTubeEmbed(song);
-        if (youtubeEmbed) {
-            console.log('Using YouTube embed for Billboard song');
+        const spotifyEmbed = getSpotifyEmbed(song);
+        if (spotifyEmbed) {
+            console.log('Using Spotify embed for Billboard song');
             return `
-                <div class="youtube-embed" id="youtube-${song.title.replace(/\s+/g, '-')}">
+                <div class="spotify-embed" id="spotify-${song.title.replace(/\s+/g, '-')}">
                     <iframe 
+                        style="border-radius:12px" 
+                        src="${spotifyEmbed}" 
                         width="100%" 
-                        height="166" 
-                        src="${youtubeEmbed}" 
-                        title="${song.title} by ${song.artist}"
+                        height="152" 
                         frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen
-                        onload="console.log('YouTube iframe loaded successfully: ${song.title}')"
-                        onerror="handleYouTubeError('${song.title}', '${song.artist}')"
-                        onabort="handleYouTubeError('${song.title}', '${song.artist}')">
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"
+                        onload="console.log('Spotify iframe loaded successfully: ${song.title}')"
+                        onerror="handleSpotifyError('${song.title}', '${song.artist}')"
+                        onabort="handleSpotifyError('${song.title}', '${song.artist}')">
                     </iframe>
-                    <div class="youtube-info">
-                        <small>YouTube: ${song.title} by ${song.artist}</small>
+                    <div class="spotify-info">
+                        <small>Spotify: ${song.title} by ${song.artist}</small>
                     </div>
                 </div>
             `;
         } else {
-            console.log('YouTube embed not found for Billboard song');
+            console.log('Spotify embed not found for Billboard song');
             return `
                 <div class="audio-placeholder">
-                    🎵 YouTube video not available
+                    🎵 Spotify track not available
                     <br><small>(Original Billboard recording)</small>
                 </div>
             `;
@@ -145,49 +146,48 @@ function getAudioPlayer(song) {
     }
 }
 
-// YouTube video ID mapping for Billboard songs
-// Updated with videos that allow embedding
-const youtubeVideoIds = {
+// Spotify track ID mapping for Billboard songs
+const spotifyTrackIds = {
     // DFA Analysis - Closest to α=1.0
-    "Bad Day - Daniel Powter": "9HZ5DpFyQqE", // Alternative version that allows embedding
+    "Bad Day - Daniel Powter": "0mUyMawtxj1CJ76kn9gIZK",
     
     // DFA Analysis - Min α
-    "Let Me Love You - Mario": "mbG5fhlMdrI",
-
+    "Let Me Love You - Mario": "3bNx3S9e3VR3EKtE4HZdnf",
+    
     // DFA Analysis - Max α
-    "Rockstar - DaBaby feat. Roddy Ricch": "83xBPCw5hh4",
+    "Rockstar - DaBaby feat. Roddy Ricch": "17jTxlFxv1n5rc7uVJotLi",
     
     // MFDFA Analysis - Max Width
-    "Sugar - Maroon 5": "N1BcpzPGlYQ",
+    "Sugar - Maroon 5": "2iuZJX9X9P0GKaE3cim7qU",
     
     // MFDFA Analysis - Min Width
-    "Dark Horse - Katy Perry and Juicy J": "ONb4aTtG6Ps",
-
+    "Dark Horse - Katy Perry and Juicy J": "6jJ1R9cktKcMky9elKwZ0x",
+    
     // MFDFA Analysis - Max Skew
-    "Auf Wiederseh'n Sweetheart - Vera Lynn": "36prRdWCqu0",
+    "Auf Wiederseh'n Sweetheart - Vera Lynn": "2QwMObGLHr5K7k6OZWiS5K",
     
     // MFDFA Analysis - Min Skew
-    "Low - Flo Rida feat. T-Pain": "CxPc1Q3-0zc"
+    "Low - Flo Rida feat. T-Pain": "0CAfXk7DXMnon4gLudAp7J"
 };
 
-// Function to get YouTube embed URL for a song
-function getYouTubeEmbed(song) {
+// Function to get Spotify embed URL for a song
+function getSpotifyEmbed(song) {
     const songKey = `${song.title} - ${song.artist}`;
-    const videoId = youtubeVideoIds[songKey];
+    const trackId = spotifyTrackIds[songKey];
     
-    console.log('YouTube lookup:', {
+    console.log('Spotify lookup:', {
         songKey: songKey,
-        videoId: videoId,
-        found: !!videoId
+        trackId: trackId,
+        found: !!trackId
     });
     
-    if (videoId) {
-        const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-        console.log('YouTube embed URL:', embedUrl);
+    if (trackId) {
+        const embedUrl = `https://open.spotify.com/embed/track/${trackId}`;
+        console.log('Spotify embed URL:', embedUrl);
         return embedUrl;
     }
     
-    console.log('No YouTube video found for:', songKey);
+    console.log('No Spotify track found for:', songKey);
     return null;
 }
 
@@ -277,7 +277,7 @@ function populateSection(sectionId, songs) {
 async function loadAudioMetadata() {
     try {
         console.log('Loading audio metadata...');
-        const response = await fetch('audio_metadata.json?v=9');
+        const response = await fetch('audio_metadata.json?v=10');
         console.log('Metadata response status:', response.status);
         if (response.ok) {
             const metadata = await response.json();
@@ -301,20 +301,20 @@ function isLocalhost() {
            window.location.hostname === '';
 }
 
-// Function to handle YouTube video loading errors
-function handleYouTubeError(title, artist) {
-    console.error(`YouTube iframe failed to load: ${title} by ${artist}`);
+// Function to handle Spotify track loading errors
+function handleSpotifyError(title, artist) {
+    console.error(`Spotify iframe failed to load: ${title} by ${artist}`);
     
-    // Find the YouTube container and replace with error message
-    const containerId = `youtube-${title.replace(/\s+/g, '-')}`;
+    // Find the Spotify container and replace with error message
+    const containerId = `spotify-${title.replace(/\s+/g, '-')}`;
     const container = document.getElementById(containerId);
     
     if (container) {
         container.innerHTML = `
             <div class="audio-placeholder">
-                🎵 YouTube video unavailable
+                🎵 Spotify track unavailable
                 <br><small>${title} by ${artist}</small>
-                <br><small>(Video may be restricted or removed)</small>
+                <br><small>(Track may be restricted or removed)</small>
             </div>
         `;
     }
