@@ -246,3 +246,4 @@ document.addEventListener('DOMContentLoaded', function() {
 // Export for use in other scripts
 window.AudioUploadManager = AudioUploadManager;
 
+
