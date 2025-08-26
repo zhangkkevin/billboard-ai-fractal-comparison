@@ -4,14 +4,10 @@ BiMMuDa-main/backup_data/
 
 # Results and output files
 results/
-*.csv
 *.json
 
-# Keep data directory for annotations and metadata
-!data/
-!data/**/*.csv
-
-# Keep data directory for annotations and results
+# CSV files (exclude by default, but allow specific directories)
+*.csv
 !data/
 !data/**/*.csv
 

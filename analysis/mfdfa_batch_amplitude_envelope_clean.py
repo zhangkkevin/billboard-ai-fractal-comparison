@@ -16,10 +16,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 # Specify models and their music outputs you want to process
 AUDIO_ROOTS = {
     # For example,
-    "billboard": str(REPO_ROOT / "audio_data" / "billboard" / "non_separated" / "full_duration"),
+    "billboard": str(REPO_ROOT / "audio_data" / "billboard"),
     "diffrhythm": str(REPO_ROOT / "audio_data" / "diffrhythm"),
-    "suno_batch_1": str(REPO_ROOT / "audio_data" / "suno_v4_5" / "non_separated"),
-    "yue": str(REPO_ROOT / "audio_data" / "YuE" / "non_separated"),
+    "suno_batch_1": str(REPO_ROOT / "audio_data" / "suno_v4_5"),
+    "yue": str(REPO_ROOT / "audio_data" / "YuE"),
 }
 
 # Analysis parameters

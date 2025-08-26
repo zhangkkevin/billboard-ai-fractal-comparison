@@ -22,11 +22,10 @@ base_output_dir = str(REPO_ROOT / "results" / "amplitude_envelope" / "dfa")
 
 # Specify models and their music outputs you want to process
 AUDIO_ROOTS = {
-    # For example,
-    # "billboard": str(REPO_ROOT / "audio_data" / "billboard" / "non_separated" / "full_duration"),
-    # "diffrhythm": str(REPO_ROOT / "audio_data" / "diffrhythm"),
-    # "suno_batch_1": str(REPO_ROOT / "audio_data" / "suno_v4_5" / "full" / "non_separated"),
-    # "yue": str(REPO_ROOT / "audio_data" / "YuE" / "non_separated"),
+    "billboard": str(REPO_ROOT / "audio_data" / "billboard"),
+    "diffrhythm": str(REPO_ROOT / "audio_data" / "diffrhythm"),
+    "suno_batch_1": str(REPO_ROOT / "audio_data" / "suno_v4_5"),
+    "yue": str(REPO_ROOT / "audio_data" / "YuE")
 }
 
 # === FUNCTION DEFINITIONS ===
