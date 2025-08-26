@@ -1,16 +1,16 @@
 <p align="center">
-    <img src="acm.png" width="200"/>
-</p>
-
-<p align="center">
     <h1>Multifractal Comparison of Billboard and AI-Generated Music</h1>
 </p>
 
 <p align="center">
-    <a href="https://doi.org/10.1145/3746027.3758168">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Demo</a>
+    <img src="./acm.png" width="200" alt="ACM Logo"/>
 </p>
 
-This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music， specifically,
+<p align="center">
+    <a href="https://doi.org/10.1145/3746027.3758168">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Demo</a> &nbsp;|&nbsp; 📊 <a href="https://zenodo.org/placeholder">Dataset</a>
+</p>
+
+This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music, specifically,
 - **Billboard Top 5 songs** (1950-2024) - Human-created music
 - **AI-generated music** from multiple models:
   - **[Suno v4.5](https://suno.com/)** - Latest AI music generation model
