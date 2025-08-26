@@ -4,17 +4,7 @@
     <a href="https://doi.org/placeholder-link">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Demo</a>
 </p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
-
-This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music.
-
-This project analyzes the fractal properties of music amplitude envelopes using advanced time series analysis techniques:
-- **Detrended Fluctuation Analysis (DFA)** - Measures long-range correlations in music amplitude envelopes
-- **Multifractal Detrended Fluctuation Analysis (MFDFA)** - Analyzes complex scaling behavior across different fluctuation magnitudes
-
-The analysis compares:
+This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music. Specifically,
 - **Billboard Top 5 songs** (1950-2024) - Human-created music
 - **AI-generated music** from multiple models:
   - **[Suno v4.5](https://suno.com/)** - Latest AI music generation model
@@ -80,37 +70,9 @@ brew install ffmpeg
 **Windows:**
 Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
 
-## 🔧 Usage
-
-### Running Analysis Scripts
-
-#### 1. DFA Analysis
-```bash
-python analysis/dfa_batch_amplitude_envelope_clean.py
-```
-
-#### 2. MFDFA Analysis
-```bash
-python analysis/mfdfa_batch_amplitude_envelope_clean.py
-```
-
-### Jupyter Notebooks
-
-For interactive analysis and visualization:
-
-```bash
-jupyter lab
-# or
-jupyter notebook
-```
-
-Available notebooks:
-- `notebooks/dfa_music_structure.ipynb` - DFA analysis and visualization
-- `notebooks/mfdfa_music_structure.ipynb` - MFDFA analysis and visualization
-
 ## 📁 Data Structure
 
-### Required Directory Structure
+### Required Directory Structure for Batch Analysis
 
 ```
 audio_data/
