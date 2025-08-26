@@ -17,7 +17,7 @@ This repository contains code and data for performing fractal analysis (DFA and 
   - **[DiffRhythm](https://github.com/ASLP-lab/DiffRhythm)** - Diffusion-based music generation
   - **[YuE](https://github.com/multimodal-art-projection/YuE)** - Neural music synthesis model
 
-Pre-computed results are available in `reference_data/` for:
+Pre-computed results are available in `data/results` for:
 - **DFA results**: Alpha values, intercepts, and fit statistics
 - **MFDFA results**: Alpha width, alpha peak, spectrum skew, and H(q) values
 
@@ -63,6 +63,27 @@ Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/downl
    ```bash
    pip install -r requirements.txt
    ```
+
+## 🔬 Analysis Scripts and Notebooks
+
+### Analysis Scripts
+- **`analysis/dfa_batch_amplitude_envelope.py`** - Detrended Fluctuation Analysis on amplitude envelopes
+- **`analysis/mfdfa_batch_amplitude_envelope.py`** - Multifractal Detrended Fluctuation Analysis on amplitude envelopes
+
+### Jupyter Notebooks
+- **`notebooks/dfa_music_structure.ipynb`** - DFA analysis and visualization
+- **`notebooks/mfdfa_music_structure.ipynb`** - MFDFA analysis and visualization
+
+### Usage
+```bash
+# Run DFA analysis
+python analysis/dfa_batch_amplitude_envelope.py
+
+# Run MFDFA analysis  
+python analysis/mfdfa_batch_amplitude_envelope.py
+```
+
+**Note**: Server versions of scripts and notebooks (with `_server` suffix) contain copyrighted content and are excluded from this repository.
    
 ## 📁 Data Structure
 

@@ -44,18 +44,18 @@ logs/
 *.tmp
 *.temp
 
-# Original analysis scripts (keep clean versions only on GitHub)
-analysis/dfa_batch_amplitude_envelope.py
-analysis/mfdfa_batch_amplitude_envelope.py
+# Server versions of analysis scripts (keep main versions only on GitHub)
+analysis/dfa_batch_amplitude_envelope_server.py
+analysis/mfdfa_batch_amplitude_envelope_server.py
 analysis/midi_fractal_batch_analysis.py
 
-# Keep only clean notebooks for analysis and visualization
+# Keep only main notebooks for analysis and visualization
 !notebooks/
-!notebooks/*_clean.ipynb
+!notebooks/*.ipynb
 
-# Exclude original notebooks with copyrighted content
-notebooks/dfa_music_structure.ipynb
-notebooks/mfdfa_music_structure.ipynb
+# Exclude server notebooks with copyrighted content
+notebooks/dfa_music_structure_server.ipynb
+notebooks/mfdfa_music_structure_server.ipynb
 notebooks/pitch_contour.ipynb
 vocal_to_midi.py
 
