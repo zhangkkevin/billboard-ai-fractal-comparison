@@ -7,6 +7,10 @@ results/
 *.csv
 *.json
 
+# Keep data directory for annotations and metadata
+!data/
+!data/**/*.csv
+
 # Keep reference data for reproducibility
 !reference_data/
 !reference_data/**/*.csv
