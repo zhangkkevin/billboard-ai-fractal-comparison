@@ -1,15 +1,25 @@
-# Multifractal Comparison of Billboard and AI-Generated Music
-
 <p align="center">
-    <a href="https://doi.org/placeholder-link">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Demo</a>
+    <img src="acm.png" width="200"/>
 </p>
 
-This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music. Specifically,
+<p align="center">
+    <h1>Multifractal Comparison of Billboard and AI-Generated Music</h1>
+</p>
+
+<p align="center">
+    <a href="https://doi.org/10.1145/3746027.3758168">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Demo</a>
+</p>
+
+This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music， specifically,
 - **Billboard Top 5 songs** (1950-2024) - Human-created music
 - **AI-generated music** from multiple models:
   - **[Suno v4.5](https://suno.com/)** - Latest AI music generation model
   - **[DiffRhythm](https://github.com/ASLP-lab/DiffRhythm)** - Diffusion-based music generation
   - **[YuE](https://github.com/multimodal-art-projection/YuE)** - Neural music synthesis model
+
+Pre-computed results are available in `reference_data/` for:
+- **DFA results**: Alpha values, intercepts, and fit statistics
+- **MFDFA results**: Alpha width, alpha peak, spectrum skew, and H(q) values
 
 Due to copyright restrictions, Billboard audio files are **NOT** included in the dataset.
 
@@ -20,6 +30,20 @@ Due to copyright restrictions, Billboard audio files are **NOT** included in the
 - Python 3.10+
 - Conda or pip package manager
 - FFmpeg (for audio processing)
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update
+sudo apt-get install ffmpeg
+```
+
+**macOS:**
+```bash
+brew install ffmpeg
+```
+
+**Windows:**
+Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
 
 ### Installation
 
@@ -39,37 +63,7 @@ Due to copyright restrictions, Billboard audio files are **NOT** included in the
    ```bash
    pip install -r requirements.txt
    ```
-
-## 📦 Installation
-
-### Option 1: Using requirements.txt (Recommended)
-
-```bash
-pip install -r requirements.txt
-```
-
-### Option 2: Manual installation
-
-```bash
-pip install numpy pandas scipy matplotlib seaborn nolds MFDFA tqdm pydub scikit-learn librosa tinytag
-```
-
-### System Dependencies
-
-**Ubuntu/Debian:**
-```bash
-sudo apt-get update
-sudo apt-get install ffmpeg
-```
-
-**macOS:**
-```bash
-brew install ffmpeg
-```
-
-**Windows:**
-Download FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
-
+   
 ## 📁 Data Structure
 
 ### Required Directory Structure for Batch Analysis
@@ -97,31 +91,22 @@ Examples:
 - `2020_01_Taylor Swift_Cardigan.mp3`
 - `1958_02_Elvis Presley_All Shook Up.mp3`
 
-### Reference Data
-
-Pre-computed results are available in `reference_data/` for:
-- **DFA results**: Alpha values, intercepts, and fit statistics
-- **MFDFA results**: Alpha width, alpha peak, spectrum skew, and H(q) values
-
 ## 📚 Citation
 
 If you use this code in your research, please cite:
 
 ```bibtex
-@article{zhang2025multifractal,
+@inproceedings{zhang2025multifractal,
   title={Multifractal Comparison of Billboard and AI-Generated Music},
-  author={Zhang, Kevin Kailun},
-  journal={ACM Multimedia Brave New Ideas},
+  author={Zhang, Kevin Kailun and Sun, Ying and Xiong, Hui},
+  booktitle={Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)},
+  pages={1--10},
   year={2025},
-  note={Submitted}
+  organization={ACM},
+  doi={10.1145/3746027.3758168},
+  isbn={979-8-4007-2035-2/2025/10}
 }
 ```
 
 ## 📞 Contact
-
-- **Author**: Kevin Kailun Zhang
-- **Email**: kkzhang825@connect.hkust-gz.edu.cn
-
----
-
-**Note**: This research is part of ongoing work on understanding the fractal properties of music and comparing human-created vs AI-generated compositions.
+If you are interested in this work and want to message us, feel free to leave a email to `kkzhang825@connect.hkust-gz.edu.cn`.
