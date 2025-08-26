@@ -11,9 +11,9 @@ results/
 !data/
 !data/**/*.csv
 
-# Keep reference data for reproducibility
-!reference_data/
-!reference_data/**/*.csv
+# Keep data directory for annotations and results
+!data/
+!data/**/*.csv
 
 # Python cache and environment files
 __pycache__/
