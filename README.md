@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-    <a href="https://doi.org/10.1145/3746027.3758168">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Listening Samples</a> &nbsp;|&nbsp; 📊 <a href="https://zenodo.org/placeholder">Dataset</a>
+    <a href="https://doi.org/10.1145/3746027.3758168">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Listening Samples</a> &nbsp;|&nbsp; 📊 <a href="https://zenodo.org/placeholder">Dataset (coming soon)</a>
 </p>
 
 This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music, specifically,
