@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <img src="./acm.png" width="600" alt="ACM Logo"/>
+    <img src="./assets/images/acm.png" width="400" alt="ACM Logo"/>
 </p>
 
 <p align="center">
