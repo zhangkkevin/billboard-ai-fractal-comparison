@@ -1,38 +1,18 @@
-# Billboard AI Fractal Comparison
+# Multifractal Comparison of Billboard and AI-Generated Music
+
+<p align="center">
+    <a href="https://doi.org/placeholder-link">📑 Paper</a> &nbsp;|&nbsp; 🎵 <a href="https://zhangkkevin.github.io/billboard-ai-fractal-comparison/">Demo</a>
+</p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
 
-This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music, as described in the paper:
-
-**"Multifractal Comparison of Billboard and AI-Generated Music"**  
-*(Accepted to ACM Multimedia Brave New Ideas 2025)*
-
-📄 **[Read the Paper](https://doi.org/placeholder-link)**
-
-## 🎵 [Live Demo: Audio Samples from Analysis Results](https://zhangkkevin.github.io/billboard-ai-fractal-comparison/)
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Data Structure](#data-structure)
-- [Analysis Parameters](#analysis-parameters)
-- [Results](#results)
-- [Citation](#citation)
-- [Contact](#contact)
-
-## 🎯 Overview
+This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music.
 
 This project analyzes the fractal properties of music amplitude envelopes using advanced time series analysis techniques:
-
 - **Detrended Fluctuation Analysis (DFA)** - Measures long-range correlations in music amplitude envelopes
 - **Multifractal Detrended Fluctuation Analysis (MFDFA)** - Analyzes complex scaling behavior across different fluctuation magnitudes
-
-### Analysis Comparison
 
 The analysis compares:
 - **Billboard Top 5 songs** (1950-2024) - Human-created music
@@ -126,19 +106,6 @@ Available notebooks:
 - `notebooks/dfa_music_structure.ipynb` - DFA analysis and visualization
 - `notebooks/mfdfa_music_structure.ipynb` - MFDFA analysis and visualization
 
-### Configuration
-
-Before running analysis, configure your audio data paths in the analysis scripts:
-
-```python
-AUDIO_ROOTS = {
-    "billboard": "path/to/audio_data/billboard/audio_files",
-    "suno_v4_5": "path/to/audio_data/suno_v4_5/audio_files", 
-    "diffrhythm": "path/to/audio_data/diffrhythm/audio_files",
-    "yue": "path/to/audio_data/yue/audio_files"
-}
-```
-
 ## 📁 Data Structure
 
 ### Required Directory Structure
@@ -187,34 +154,6 @@ Due to copyright restrictions, Billboard audio files are not included in this re
 - **MFDFA order**: 2 (quadratic detrending)
 - **Lag range**: 10 to 3162 (logarithmically spaced)
 - **Spectrum calculation**: Legendre transform
-
-## 📊 Results
-
-### Output Directories
-
-Analysis scripts create timestamped output directories:
-
-- **DFA**: `results/amplitude_envelope/dfa/smooth_ms_25_downsample_150_hz_YYYYMMDD_HHMMSS/`
-- **MFDFA**: `results/amplitude_envelope/mfdfa/smooth_ms_25_downsample_150_hz_q-10_10_42_YYYYMMDD_HHMMSS/`
-
-### DFA Results Format
-
-Each CSV contains:
-- `year`, `position`, `artist`, `title` - Song metadata
-- `alpha` - DFA scaling exponent
-- `intercept` - Linear fit intercept
-- `r_squared` - Goodness of fit
-- `log_n`, `log_fn` - DFA fluctuation data (JSON format)
-
-### MFDFA Results Format
-
-Each CSV contains:
-- `year`, `position`, `artist`, `title` - Song metadata
-- `alpha_width` - Width of multifractal spectrum
-- `alpha_peak` - Peak of multifractal spectrum
-- `spectrum_skew` - Asymmetry of spectrum
-- `truncation` - Spectrum truncation type
-- `alpha`, `f_alpha`, `H_q` - Full spectra (JSON format)
 
 ### Reference Data
 
