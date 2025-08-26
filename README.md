@@ -21,6 +21,8 @@ The analysis compares:
   - **[DiffRhythm](https://github.com/ASLP-lab/DiffRhythm)** - Diffusion-based music generation
   - **[YuE](https://github.com/multimodal-art-projection/YuE)** - Neural music synthesis model
 
+Due to copyright restrictions, Billboard audio files are **NOT** included in the dataset.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -132,28 +134,6 @@ YYYY_POSITION_ARTIST_TITLE.mp3
 Examples:
 - `2020_01_Taylor Swift_Cardigan.mp3`
 - `1958_02_Elvis Presley_All Shook Up.mp3`
-
-### Data Access
-
-Due to copyright restrictions, Billboard audio files are not included in this repository. AI-generated audio samples are available on Zenodo: [Link to be added]
-
-## ⚙️ Analysis Parameters
-
-### DFA Parameters
-- **Smoothing window**: 25ms
-- **Target sample rate**: 150 Hz
-- **Original sample rate**: 22050 Hz
-- **DFA order**: 1 (linear detrending)
-- **Overlap**: True
-- **Fit trend**: Polynomial
-
-### MFDFA Parameters
-- **Smoothing window**: 25ms
-- **Target sample rate**: 150 Hz
-- **Q-values**: -10 to 10 (42 points)
-- **MFDFA order**: 2 (quadratic detrending)
-- **Lag range**: 10 to 3162 (logarithmically spaced)
-- **Spectrum calculation**: Legendre transform
 
 ### Reference Data
 
