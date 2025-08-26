@@ -56,5 +56,9 @@ analysis/midi_fractal_batch_analysis.py
 # Exclude original notebooks with copyrighted content
 notebooks/dfa_music_structure.ipynb
 notebooks/mfdfa_music_structure.ipynb
-notebooks/pitch_contour.ipynbBiMMuDa-main/
+notebooks/pitch_contour.ipynb
 vocal_to_midi.py
+
+# Exclude external datasets and examples
+BiMMuDa-main/
+readme_examples/
