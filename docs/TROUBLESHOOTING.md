@@ -27,24 +27,24 @@
    - Visit `test-audio.html` to check if files are accessible
    - Check browser console for specific error messages
 
-## YouTube Video Issues
+## Spotify Integration Issues
 
 ### Common Problems:
 
-1. **Placeholder Video IDs**: Some videos use placeholder IDs that don't work.
-2. **Embedding Restrictions**: Some videos may have embedding disabled.
-3. **Autoplay Restrictions**: Modern browsers block autoplay.
+1. **Track ID Issues**: Some Spotify track IDs may become invalid or change.
+2. **Embedding Restrictions**: Some tracks may have embedding disabled by the artist.
+3. **Regional Restrictions**: Spotify content may be restricted in certain regions.
 
 ### Solutions:
 
-1. **Update Video IDs**: Replace placeholder IDs with actual YouTube video IDs.
-2. **Check Embedding**: Ensure videos allow embedding.
-3. **Add Error Handling**: Show fallback content when videos fail to load.
+1. **Update Track IDs**: Replace invalid IDs with working Spotify track IDs.
+2. **Check Embedding**: Ensure tracks allow embedding.
+3. **Add Error Handling**: Show fallback content when Spotify embeds fail to load.
 
 ## Debugging Steps
 
 1. **Open Browser Console**: Press F12 and check for error messages.
-2. **Visit Debug Page**: Go to `debug.html` to test audio and video loading.
+2. **Visit Test Page**: Go to `test-spotify.html` to test Spotify track loading.
 3. **Check Network Tab**: Look for failed requests in the Network tab.
 4. **Test Locally**: Run a local server to test without GitHub Pages restrictions.
 
@@ -77,4 +77,4 @@ If audio files continue to have issues:
 
 1. **Use External Hosting**: Host audio files on a dedicated audio hosting service
 2. **Use Audio Streaming**: Consider using a streaming service API
-3. **Reduce Dependencies**: Focus on YouTube videos for Billboard songs and smaller audio files for AI-generated content
+3. **Reduce Dependencies**: Focus on Spotify embeds for Billboard songs and smaller audio files for AI-generated content
