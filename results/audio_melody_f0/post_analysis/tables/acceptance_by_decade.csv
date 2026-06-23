@@ -1,0 +1,25 @@
+source,decade,total_tracks,accepted_tracks,skipped_tracks,source_label,acceptance_rate
+billboard,1950,52,27,25,Billboard,0.5192307692307693
+billboard,1960,50,24,26,Billboard,0.48
+billboard,1970,52,26,26,Billboard,0.5
+billboard,1980,50,27,23,Billboard,0.54
+billboard,1990,52,39,13,Billboard,0.75
+billboard,2000,50,43,7,Billboard,0.86
+billboard,2010,50,45,5,Billboard,0.9
+billboard,2020,25,24,1,Billboard,0.96
+suno_v4_5,1950,52,34,18,Suno v4.5,0.6538461538461539
+suno_v4_5,1960,50,38,12,Suno v4.5,0.76
+suno_v4_5,1970,52,34,18,Suno v4.5,0.6538461538461539
+suno_v4_5,1980,50,38,12,Suno v4.5,0.76
+suno_v4_5,1990,52,46,6,Suno v4.5,0.8846153846153846
+suno_v4_5,2000,50,40,10,Suno v4.5,0.8
+suno_v4_5,2010,50,42,8,Suno v4.5,0.84
+suno_v4_5,2020,25,20,5,Suno v4.5,0.8
+yue,1950,47,23,24,YuE,0.48936170212765956
+yue,1960,47,19,28,YuE,0.40425531914893614
+yue,1970,47,18,29,YuE,0.3829787234042553
+yue,1980,44,11,33,YuE,0.25
+yue,1990,42,20,22,YuE,0.47619047619047616
+yue,2000,49,25,24,YuE,0.5102040816326531
+yue,2010,46,23,23,YuE,0.5
+yue,2020,25,14,11,YuE,0.56

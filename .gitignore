@@ -10,6 +10,10 @@ results/
 *.csv
 !data/
 !data/**/*.csv
+!results/
+!results/audio_melody_f0/
+!results/audio_melody_f0/post_analysis/
+!results/audio_melody_f0/post_analysis/**
 
 # Python cache and environment files
 __pycache__/

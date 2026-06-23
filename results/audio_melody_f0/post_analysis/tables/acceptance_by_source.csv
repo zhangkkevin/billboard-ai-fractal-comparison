@@ -1,0 +1,4 @@
+source,total_tracks,accepted_tracks,skipped_tracks,source_label,acceptance_rate
+billboard,381,255,126,Billboard,0.6692913385826772
+suno_v4_5,381,292,89,Suno v4.5,0.7664041994750657
+yue,347,153,194,YuE,0.4409221902017291
