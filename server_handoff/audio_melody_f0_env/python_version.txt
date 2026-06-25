@@ -1,0 +1,4 @@
+Python 3.10.16
+
+/home/kevinzhang/.conda/envs/fractal_analysis/bin/python
+

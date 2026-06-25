@@ -10,8 +10,32 @@ results/
 *.csv
 !data/
 !data/**/*.csv
+data/annotations/billboard_annotations.csv
+!data/annotations/billboard_annotations_redacted.csv
+
+# Audio-melody F0 reproducibility packet: scripts, manifests, summaries, QA
+# figures, and dissertation-facing post-analysis outputs only.
+!server_handoff/
+!server_handoff/**
+server_handoff/**/__pycache__/
+server_handoff/**/*.pyc
 !results/
 !results/audio_melody_f0/
+!results/audio_melody_f0/f0_fractal_descriptors.csv
+!results/audio_melody_f0/f0_quality.csv
+!results/audio_melody_f0/group_summary.csv
+!results/audio_melody_f0/manifest.csv
+!results/audio_melody_f0/run_manifest_stage1.yml
+!results/audio_melody_f0/run_manifest_stage2.yml
+!results/audio_melody_f0/qa/
+!results/audio_melody_f0/qa/*.png
+!results/audio_melody_f0/smoke/
+!results/audio_melody_f0/smoke/benchmark/
+!results/audio_melody_f0/smoke/benchmark/benchmark_manifest.csv
+!results/audio_melody_f0/smoke/benchmark/benchmark_results.csv
+results/audio_melody_f0/cache/
+results/audio_melody_f0/**/*.npz
+results/audio_melody_f0/smoke/benchmark/workers_*/
 !results/audio_melody_f0/post_analysis/
 !results/audio_melody_f0/post_analysis/**
 

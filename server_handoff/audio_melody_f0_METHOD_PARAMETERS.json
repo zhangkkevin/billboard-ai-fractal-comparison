@@ -1,0 +1,188 @@
+{
+  "bundle_date": "20260625",
+  "generated_at_utc": "2026-06-25T09:58:21.589297+00:00",
+  "project_root": "/home/data/kevinzhang/research/fractal_analysis",
+  "config": {
+    "workers": 128,
+    "models": {
+      "billboard": {
+        "subpath": "billboard/vocals/full_duration",
+        "expected": 381
+      },
+      "suno_v4_5": {
+        "subpath": "suno_v4_5/vocals/batch_1",
+        "expected": 381
+      },
+      "yue": {
+        "subpath": "YuE/vocals",
+        "expected": 347
+      }
+    },
+    "f0": {
+      "sr": 22050,
+      "frame_length": 2048,
+      "hop_length": 512,
+      "fmin_hz": 65.41,
+      "fmax_hz": 2093.0,
+      "max_gap_fill_sec": 0.5,
+      "min_region_sec": 30.0,
+      "min_region_voiced_coverage": 0.3
+    },
+    "fractal": {
+      "q_min": -5,
+      "q_max": 5,
+      "q_n": 21,
+      "dfa_order": 1,
+      "mfdfa_order": 1,
+      "scale_policy": "SAFE"
+    },
+    "outputs": {
+      "results_root": "results/audio_melody_f0",
+      "dissertation_root": "data/results/audio_melody_f0",
+      "smoke_subdir": "smoke"
+    },
+    "benchmark": {
+      "sample_size": 192,
+      "per_model": 64,
+      "seed": 42,
+      "worker_counts": [
+        16,
+        32,
+        64,
+        128
+      ]
+    },
+    "annotations": "data/annotations/billboard_annotations.csv"
+  },
+  "f0_extraction": {
+    "library": "librosa.pyin",
+    "load": "librosa.load(..., sr=sr, mono=True)",
+    "sr": 22050,
+    "frame_length": 2048,
+    "hop_length": 512,
+    "frame_duration_sec": 0.023219954648526078,
+    "fmin_hz": 65.41,
+    "fmax_hz": 2093.0,
+    "voiced_mask": "voiced_flag from pyin AND f0 > 0 AND finite",
+    "voiced_probs": "median over raw voiced frames in selected region"
+  },
+  "contour_cleaning": {
+    "semitone_formula": "12 * log2(f0_hz / 440.0)",
+    "reference_pitch_hz": 440.0,
+    "centering": "subtract median of voiced semitones in selected region",
+    "smoothing": "none beyond short-gap linear interpolation",
+    "max_gap_fill_sec": 0.5,
+    "min_region_sec": 30.0,
+    "min_region_voiced_coverage": 0.3,
+    "region_selection": "longest voiced region meeting duration and coverage thresholds",
+    "region_split_gap_frames": "max_gap_frames + 1",
+    "jump_rate": "fraction of consecutive voiced semitone diffs with abs(diff) > 1.0",
+    "octave_jump_rate": "fraction with abs(diff) > 9.0",
+    "skip_reasons": [
+      "no_valid_region",
+      "too_short",
+      "low_region_voiced_coverage"
+    ]
+  },
+  "server_acceptance": {
+    "stage1_success": "contour_clean success (valid region, duration, coverage gates)",
+    "stage2_acceptance": ">= 32 finite semitone samples; NaNs linearly interpolated; finite alpha_dfa"
+  },
+  "local_robustness_filters": {
+    "note": "post_analysis only; does not change server CSV statuses",
+    "coverage_ge": 0.7,
+    "median_voiced_prob_ge": 0.2,
+    "jump_rate_le": 0.1,
+    "octave_jump_rate_le": 0.01
+  },
+  "dfa_scales": {
+    "policy": "SAFE",
+    "input_signal": "median-centered semitone contour",
+    "integration": "cumsum(x - mean(x))",
+    "n_min_formula": "max(16, floor(0.01 * N))",
+    "n_max_formula": "floor(0.10 * N)",
+    "resolution_candidates": [
+      25,
+      30,
+      35,
+      40
+    ],
+    "selection_rule": "first unique(logspace(...).astype(int)) filtered to [n_min, n_max] with size >= 20",
+    "fallback_resolution": 30,
+    "post_filter": "unique nvals; keep only nvals > 1",
+    "order": 1,
+    "library": "nolds.dfa(..., overlap=True, order=1)"
+  },
+  "mfdfa_lags": {
+    "policy": "SAFE",
+    "q_min": -5,
+    "q_max": 5,
+    "q_n": 21,
+    "q_construction": "np.linspace(q_min, q_max, q_n); sorted unique; insert 0.0 if missing",
+    "min_lag_formula": "max(16, floor(0.01 * N))",
+    "max_lag_formula": "floor(0.10 * N)",
+    "resolution_candidates": [
+      25,
+      30,
+      35,
+      40,
+      50
+    ],
+    "selection_rule": "first unique(logspace(...).astype(int)) filtered to [min_lag, max_lag], lag > 0, size >= 25",
+    "fallback_resolution": 50,
+    "order": 1,
+    "descriptor_definitions": {
+      "alpha_width": "max(alpha_curve) - min(alpha_curve) on sorted spectrum",
+      "alpha_peak": "alpha at argmax f(alpha)",
+      "W_L": "max(alpha_peak - alpha_min, 0)",
+      "W_R": "max(alpha_max - alpha_peak, 0)",
+      "B": "(W_L - W_R) / (W_L + W_R)",
+      "R": "log((W_L + eps) / (W_R + eps))",
+      "spectrum_skew": "(alpha_max + alpha_min - 2*alpha_peak) / alpha_width (0 if width <= 1e-12)",
+      "delta_Hq": "H(q_min) - H(q_max) on sorted q grid"
+    }
+  },
+  "example_fractal_params_N3000": {
+    "N": 3000,
+    "min_scale": 30,
+    "max_scale": 300,
+    "number_of_scales": 24,
+    "q_range": {
+      "min": -5.0,
+      "max": 5.0,
+      "n_points": 21
+    },
+    "segments_at_max_scale": 10,
+    "policy": "SAFE"
+  },
+  "source_files": [
+    {
+      "path": "/home/data/kevinzhang/research/fractal_analysis/server_handoff/billboard_audio_melody_f0/config/default.yml",
+      "mtime": 1782379627.3050945
+    },
+    {
+      "path": "/home/data/kevinzhang/research/fractal_analysis/server_handoff/billboard_audio_melody_f0/third_party/fractal/dfa.py",
+      "mtime": 1782127833.626104
+    },
+    {
+      "path": "/home/data/kevinzhang/research/fractal_analysis/server_handoff/billboard_audio_melody_f0/third_party/fractal/mfdfa.py",
+      "mtime": 1782127833.626104
+    },
+    {
+      "path": "/home/data/kevinzhang/research/fractal_analysis/server_handoff/billboard_audio_melody_f0/src/billboard_audio_melody_f0/contour_clean.py",
+      "mtime": 1782379627.3050945
+    },
+    {
+      "path": "/home/data/kevinzhang/research/fractal_analysis/server_handoff/billboard_audio_melody_f0/src/billboard_audio_melody_f0/f0_extract.py",
+      "mtime": 1782379627.3050945
+    },
+    {
+      "path": "/home/data/kevinzhang/research/fractal_analysis/server_handoff/billboard_audio_melody_f0/src/billboard_audio_melody_f0/stage2.py",
+      "mtime": 1782379627.3050945
+    },
+    {
+      "path": "/home/data/kevinzhang/research/fractal_analysis/analysis/audio_melody_f0_post_analysis.py",
+      "mtime": 1782281248.8866196
+    }
+  ]
+}

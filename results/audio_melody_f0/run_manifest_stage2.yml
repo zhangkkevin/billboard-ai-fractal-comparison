@@ -1,0 +1,12 @@
+stage: stage2-fractal
+started_at: '2026-06-22T12:52:24.836845+00:00'
+finished_at: '2026-06-22T12:52:30.720908+00:00'
+elapsed_sec: 5.884063
+workers: 128
+output_scope: full
+total_tracks: 1109
+accepted_count: 700
+skipped_count: 409
+failed_count: 0
+descriptors_path: /home/data/kevinzhang/research/fractal_analysis/results/audio_melody_f0/f0_fractal_descriptors.csv
+group_summary_path: /home/data/kevinzhang/research/fractal_analysis/results/audio_melody_f0/group_summary.csv

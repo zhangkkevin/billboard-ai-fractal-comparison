@@ -1,0 +1,64 @@
+=== uname ===
+Linux 3090x8 5.4.0-174-generic #193-Ubuntu SMP Thu Mar 7 14:29:28 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+=== lscpu (head) ===
+Architecture:                       x86_64
+CPU op-mode(s):                     32-bit, 64-bit
+Byte Order:                         Little Endian
+Address sizes:                      48 bits physical, 48 bits virtual
+CPU(s):                             256
+On-line CPU(s) list:                0-255
+Thread(s) per core:                 2
+Core(s) per socket:                 64
+Socket(s):                          2
+NUMA node(s):                       2
+Vendor ID:                          AuthenticAMD
+CPU family:                         25
+Model:                              1
+Model name:                         AMD EPYC 7763 64-Core Processor
+Stepping:                           1
+Frequency boost:                    enabled
+CPU MHz:                            1495.115
+CPU max MHz:                        2450.0000
+CPU min MHz:                        1500.0000
+BogoMIPS:                           4900.40
+=== free ===
+              total        used        free      shared  buff/cache   available
+Mem:          503Gi       115Gi        76Gi       1.9Gi       311Gi       383Gi
+Swap:         107Gi          0B       107Gi
+=== conda info ===
+
+     active environment : base
+    active env location : /home/kevinzhang/miniconda3
+            shell level : 1
+       user config file : /home/kevinzhang/.condarc
+ populated config files : /home/kevinzhang/.condarc
+          conda version : 24.1.2
+    conda-build version : not installed
+         python version : 3.11.5.final.0
+                 solver : libmamba (default)
+       virtual packages : __archspec=1=zen3
+                          __conda=24.1.2=0
+                          __cuda=12.8=0
+                          __glibc=2.35=0
+                          __linux=5.4.0=0
+                          __unix=0=0
+       base environment : /home/kevinzhang/miniconda3  (read only)
+      conda av data dir : /home/kevinzhang/miniconda3/etc/conda
+  conda av metadata url : None
+           channel URLs : https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/linux-64
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/noarch
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/linux-64
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/noarch
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/linux-64
+                          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/noarch
+          package cache : /home/kevinzhang/miniconda3/pkgs
+                          /home/kevinzhang/.conda/pkgs
+       envs directories : /home/kevinzhang/.conda/envs
+                          /home/kevinzhang/miniconda3/envs
+               platform : linux-64
+             user-agent : conda/24.1.2 requests/2.31.0 CPython/3.11.5 Linux/5.4.0-174-generic ubuntu/20.04.6 glibc/2.35 solver/libmamba conda-libmamba-solver/23.12.0 libmambapy/1.5.3
+                UID:GID : 1023:1023
+             netrc file : /home/kevinzhang/.netrc
+           offline mode : False
+
+

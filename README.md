@@ -13,13 +13,14 @@
 This repository contains code and data for performing fractal analysis (DFA and MFDFA) on Billboard music and AI-generated music, specifically,
 - **Billboard Top 5 songs** (1950-2024) - Human-created music
 - **AI-generated music** from multiple models:
-  - **[Suno v4.5](https://suno.com/)** - Latest AI music generation model
+  - **[Suno v4.5](https://suno.com/)** - Fixed historical model snapshot used for this study
   - **[DiffRhythm](https://github.com/ASLP-lab/DiffRhythm)** - Diffusion-based music generation
   - **[YuE](https://github.com/multimodal-art-projection/YuE)** - Neural music synthesis model
 
 Pre-computed results are available in `data/results` for:
 - **DFA results**: Alpha values, intercepts, and fit statistics
 - **MFDFA results**: Alpha width, alpha peak, spectrum skew, and H(q) values
+- **Audio-melody F0 audit summaries**: Vocal-stem F0 quality and fractal descriptors for Billboard, Suno v4.5, and YuE
 
 Due to copyright restrictions, Billboard audio files are **NOT** included in the dataset.
 
@@ -84,6 +85,33 @@ python analysis/mfdfa_batch_amplitude_envelope.py
 ```
 
 **Note**: Server versions of scripts and notebooks (with `_server` suffix) contain copyrighted content and are excluded from this repository.
+
+## Audio-Melody F0 Dissertation Extension
+
+The dissertation extension adds an audio-derived melody-contour audit for
+Billboard, Suno v4.5, and YuE vocal stems. It uses the same F0 extraction and
+fractal settings across all three sources and does not compare BiMMuDa symbolic
+melody annotations against auto-extracted AI melodies.
+
+Server-side reproducibility files live in `server_handoff/billboard_audio_melody_f0/`.
+The checked-in server outputs under `results/audio_melody_f0/` are enough to
+recreate local dissertation tables and figures:
+
+```bash
+python analysis/audio_melody_f0_post_analysis.py --results-root results/audio_melody_f0
+```
+
+Main local outputs:
+- `results/audio_melody_f0/post_analysis/post_analysis_summary.md`
+- `results/audio_melody_f0/post_analysis/tables/`
+- `results/audio_melody_f0/post_analysis/figures/`
+- `docs/audio_melody_f0_reproducibility.md`
+- `docs/audio_melody_f0_dissertation_extension.md`
+
+The full Stage 1 F0 extraction requires the private vocal-stem audio corpus and
+is intended to run on the server. The repository keeps the runbook, environment
+metadata, redacted annotations, manifests, summary CSVs, and QA figures, while
+excluding audio files and `.npz` contour caches.
    
 ## 📁 Data Structure
 

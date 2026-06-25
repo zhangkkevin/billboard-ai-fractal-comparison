@@ -1,0 +1,17 @@
+=== HEAD ===
+49fc576604a88685ebd8b7c340e5e74a4086c88e
+=== status --short ===
+ M .github/workflows/deploy.yml
+ M README.md
+ M docs/upload.html
+ M docs/upload.js
+ M requirements.txt
+?? analysis/audio_melody_f0_post_analysis.py
+?? audio_data/
+?? docs/audio/README.md
+?? fractal_analysis-lite-20260622.tar.gz
+?? scripts/
+?? server_handoff/
+=== remotes ===
+origin	https://github.com/zhangkkevin/billboard-ai-fractal-comparison.git (fetch)
+origin	https://github.com/zhangkkevin/billboard-ai-fractal-comparison.git (push)
